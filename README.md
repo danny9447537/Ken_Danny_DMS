@@ -7,17 +7,17 @@ The Aircraft Database Management System (DMS) is a project designed to efficient
 **Project Structure**
 The project is organized into several key components:
 1.	Models: Contains the data model classes.
-o  	Aircraft: Represents an aircraft entity with various attributes such as model, serial number, maintenance status, mission history, pilot assignment, and last inspection date.
+Aircraft: Represents an aircraft entity with various attributes such as model, serial number, maintenance status, mission history, pilot assignment, and last inspection date.
 2.	Repository: Handles database operations.
-o	AircraftRepository: Manages CRUD operations for the Aircraft entity.
+AircraftRepository: Manages CRUD operations for the Aircraft entity.
 3.	Service: Contains business logic for managing aircraft.
-o	AircraftService: Provides methods for adding, removing, updating, retrieving aircraft data, and generating maintenance reports.
+AircraftService: Provides methods for adding, removing, updating, retrieving aircraft data, and generating maintenance reports.
 4.	Controller: Manages user interactions.
-o	AircraftController: Provides methods to add, remove, update, display aircraft, and generate maintenance reports.
+AircraftController: Provides methods to add, remove, update, display aircraft, and generate maintenance reports.
 5.	User Interface: Manages the graphical user interface components.
-o	UserInterfaceManager: Creates and manages the GUI components of the application.
+UserInterfaceManager: Creates and manages the GUI components of the application.
 6.	Main: Entry point for the application.
-o	Main: Provides a command-line interface and initializes the GUI.
+Main: Provides a command-line interface and initializes the GUI.
 
 **Setup Instructions**
 Prerequisites
