@@ -1,9 +1,3 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
-
 /*
  Danny Ken
  202430-CEN-3024C-31950
@@ -11,6 +5,13 @@ import java.util.Scanner;
  The AircraftController class handles user interactions for the Aircraft Database Management System (DMS).
  It provides methods to add, remove, update, display aircraft, and generate maintenance reports.
  */
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+
 public class AircraftController {
     private AircraftService service;
     private Scanner scanner;
@@ -34,8 +35,8 @@ public class AircraftController {
     }
 
     // Method to update an aircraft's maintenance status and last inspection date via GUI.
-    public void updateAircraft(String serialNumber, String maintenanceStatus, Date lastInspectionDate) {
-        service.updateAircraft(serialNumber, maintenanceStatus, lastInspectionDate);
+    public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus, String missionHistory, String pilotAssignment, Date lastInspectionDate) {
+        service.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
     }
 
     // Method to display all aircraft via CLI.

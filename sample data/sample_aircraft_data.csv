@@ -1,0 +1,31 @@
+Model,SerialNumber,MaintenanceStatus,MissionHistory,PilotAssignment,LastInspectionDate
+F-16,F16-001,Active,Training missions,Captain John Doe,2023-01-15
+F-22,F22-002,Inactive,Combat missions,Lieutenant Jane Smith,2022-12-10
+A-10,A10-003,Active,Support missions,Captain Michael Brown,2023-02-20
+C-130,C130-004,Active,Transport missions,Major Linda Johnson,2023-03-18
+B-2,B2-005,Inactive,Stealth missions,Colonel Richard Davis,2022-11-25
+KC-135,KC135-006,Active,Refueling missions,Captain Emily White,2023-04-12
+E-3,E3-007,Active,Surveillance missions,Lieutenant Chris Green,2023-01-30
+MQ-9,MQ9-008,Inactive,Reconnaissance missions,Major Laura Blue,2022-10-05
+F-15,F15-009,Active,Air superiority missions,Lieutenant James Black,2023-02-14
+F-35,F35-010,Active,Multi-role missions,Colonel Sarah Gold,2023-03-01
+B-1,B1-011,Inactive,Long-range bombing,Major Robert Grey,2022-11-15
+C-5,C5-012,Active,Heavy transport missions,Colonel Patricia Silver,2023-03-25
+T-38,T38-013,Active,Training missions,Lieutenant Kelly Brown,2023-01-18
+RQ-4,RQ4-014,Inactive,High-altitude surveillance,Major Benjamin Green,2022-12-01
+F-117,F117-015,Inactive,Stealth attack missions,Colonel Samuel White,2022-11-05
+HH-60,HH60-016,Active,Combat search and rescue,Lieutenant Daniel Black,2023-02-22
+MC-130,MC130-017,Active,Special operations missions,Major Rachel Red,2023-04-08
+CV-22,CV22-018,Inactive,Tiltrotor missions,Captain Amanda Blue,2022-10-20
+HC-130,HC130-019,Active,Rescue missions,Lieutenant Jason Gold,2023-01-05
+AC-130,AC130-020,Active,Gunship missions,Major Monica Pink,2023-03-12
+KC-10,KC10-021,Inactive,Aerial refueling,Colonel Paul Brown,2022-12-15
+E-8,E8-022,Active,Ground surveillance,Captain Theresa Green,2023-01-22
+EC-130,EC130-023,Active,Electronic warfare,Lieutenant Adam White,2023-02-28
+F-5,F5-024,Inactive,Aggressor training,Major Heather Grey,2022-11-18
+T-6,T6-025,Active,Training missions,Lieutenant Justin Blue,2023-03-06
+U-2,U2-026,Inactive,Reconnaissance,Colonel Aaron Red,2022-12-20
+RC-135,RC135-027,Active,Reconnaissance missions,Major Steven Black,2023-01-12
+C-17,C17-028,Active,Transport missions,Captain Olivia Silver,2023-03-20
+A-29,A29-029,Inactive,Light attack missions,Lieutenant Emma Green,2022-11-22
+F-111,F111-030,Inactive,Long-range strike,Major Peter Blue,2022-12-18

@@ -1,3 +1,11 @@
+/*
+ Danny Ken
+ 202430-CEN-3024C-31950
+ 6/5/2024
+ The UserInterfaceManager class is responsible for creating and managing the graphical user interface (GUI)
+ components of the Aircraft Database Management System (DMS) application.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,13 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/*
- Danny Ken
- 202430-CEN-3024C-31950
- 6/5/2024
- The UserInterfaceManager class is responsible for creating and managing the graphical user interface (GUI)
- components of the Aircraft Database Management System (DMS) application.
- */
 public class UserInterfaceManager {
     private JFrame mainFrame;
     private JPanel mainPanel;
@@ -35,10 +36,8 @@ public class UserInterfaceManager {
     private JButton deleteAllButton;
 
     private AircraftController controller;
-
     /*
-     Constructor for the UserInterfaceManager class.
-     Initializes the AircraftController.
+     Constructor for the UserInterfaceManager class. Initializes the AircraftController.
      */
     public UserInterfaceManager(AircraftController controller) {
         this.controller = controller;
@@ -251,7 +250,11 @@ public class UserInterfaceManager {
     private void handleUpdateAircraft() {
         try {
             String serialNumber = serialNumberField.getText().trim();
+            String model = modelField.getText().trim();
+            String newSerialNumber = serialNumberField.getText().trim();
             String maintenanceStatus = (String) maintenanceStatusField.getSelectedItem();
+            String missionHistory = missionHistoryField.getText().trim();
+            String pilotAssignment = pilotAssignmentField.getText().trim();
             String dateString = lastInspectionDateField.getText().trim();
 
             // Validate that the serial number and date are provided
@@ -268,8 +271,10 @@ public class UserInterfaceManager {
             }
 
             // Update the aircraft
-            controller.updateAircraft(serialNumber, maintenanceStatus, lastInspectionDate);
+            controller.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
             JOptionPane.showMessageDialog(mainFrame, "Aircraft updated successfully.");
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(mainFrame, ex.getMessage());
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(mainFrame, "Invalid date format. Please enter the date in yyyy-MM-dd format.");
         } catch (Exception ex) {
@@ -286,8 +291,6 @@ public class UserInterfaceManager {
             } else {
                 StringBuilder aircraftDetails = new StringBuilder("<html>");
                 for (Aircraft aircraft : aircraftList) {
-                    // debugging line
-                    System.out.println(aircraft);
                     aircraftDetails
                             .append("<b>MODEL:</b> ").append(aircraft.getModel()).append("<br/>")
                             .append("<b>SERIAL NUMBER:</b> ").append(aircraft.getSerialNumber()).append("<br/>")

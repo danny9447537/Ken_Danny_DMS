@@ -6,8 +6,7 @@
  maintenance status, mission history, pilot assignment, and last inspection date. This class serves as
  the fundamental object within the Aircraft Database Management System.
  */
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.Date;
 public class Aircraft {
     private String model;
@@ -17,10 +16,6 @@ public class Aircraft {
     private String pilotAssignment;
     private Date lastInspectionDate;
 
-    /*
-    Constructor for the Aircraft object
-    Initializing model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, and lastInspectionDate
-     */
     public Aircraft(String model, String serialNumber, String maintenanceStatus, String missionHistory,
                     String pilotAssignment, Date lastInspectionDate) {
         this.model = model;
@@ -31,7 +26,8 @@ public class Aircraft {
         this.lastInspectionDate = lastInspectionDate;
     }
 
-    // Getters and Setters
+    // Getters and setters
+
     public String getModel() {
         return model;
     }
@@ -78,21 +74,5 @@ public class Aircraft {
 
     public void setLastInspectionDate(Date lastInspectionDate) {
         this.lastInspectionDate = lastInspectionDate;
-    }
-
-    @Override
-    public String toString() {
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return "<html>" +
-                "<h2>Air Force Database Management System Report(s)</h2>" +
-                "<b>MODEL:</b> " + model + "<br/>" +
-                "<b>SERIAL NUMBER:</b> " + serialNumber + "<br/>" +
-                "<b>MAINTENANCE STATUS:</b> " + maintenanceStatus + "<br/>" +
-                "<b>MISSION HISTORY:</b> " + missionHistory + "<br/>" +
-                "<b>PILOT ASSIGNMENT:</b> " + pilotAssignment + "<br/>" +
-                "<b>LAST INSPECTION DATE:</b> " + lastInspectionDate + "<br/>" +
-                "<b>REPORT DATE:</b> " + currentDate.format(formatter) + "<br/>" +
-                "</html>";
     }
 }
