@@ -40,9 +40,9 @@ Prerequisites
    
 ![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/8fe7bcec-b78d-4604-ad5b-81740dcf6b9e)
 
-4.	Update the database connection details in the AircraftRepository class.
+4.	Update the database connection details in the Main class.
 
-![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/24ce3e3a-696a-4e24-866d-a1fb7cf6a4b4)
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/4de7ef59-e840-4f0a-95bb-6c9172af1342)
 
 
 **Running the Application**
