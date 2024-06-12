@@ -44,6 +44,28 @@ Prerequisites
 
 ![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/4de7ef59-e840-4f0a-95bb-6c9172af1342)
 
+PLEASE NOTE: In Intellij, after you create your own database in MySQL, you will have to manually point the project to the .jar file that is already included under lib. Please follow these instructions to get the database connected to the Java program. 
+
+1. Go to ---> Main Menu
+
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/ada74998-b5d0-4110-9a47-672721e7721c)
+
+2. Navigate to --> Project Structure
+   
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/81395906-ca8d-4cff-a24b-15b9257ca33c)
+
+3. Click on ---> Modules --> Dependencies --> '+' sign to add the .jar file --> navigate to 
+
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/adb32150-d8a5-4014-b5e0-774356f94133)
+
+4. Navigate to the lib folder in this project to find mysql-connector-j-8.4.0.jar and add it as a dependency
+
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/49784262-7588-4402-97b6-ab7e56e0161c)
+
+5. Click 'Apply' and then 'OK'
+
+6. Run the Java program. 
+
 
 **Running the Application**
 1. Clone the repository to your local machine.
