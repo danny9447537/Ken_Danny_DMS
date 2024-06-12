@@ -37,26 +37,13 @@ Prerequisites
 
 1.	Install MySQL and create a database named aircraft_db.
 2.	Create a table named aircraft with the following schema:
-CREATE TABLE aircraft (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    model VARCHAR(255) NOT NULL,
-    serialNumber VARCHAR(255) UNIQUE NOT NULL,
-    maintenanceStatus VARCHAR(50) NOT NULL,
-    missionHistory TEXT,
-    pilotAssignment VARCHAR(255),
-    lastInspectionDate DATE
-);
-3.	Update the database connection details in the AircraftRepository class.
-private Connection connect() {
-    String url = "jdbc:mysql://127.0.0.1:3306/aircraft_db";
-    Connection conn = null;
-    try {
-        conn = DriverManager.getConnection(url, "root", "password");
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
-    }
-    return conn;
-}
+   
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/8fe7bcec-b78d-4604-ad5b-81740dcf6b9e)
+
+4.	Update the database connection details in the AircraftRepository class.
+
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/24ce3e3a-696a-4e24-866d-a1fb7cf6a4b4)
+
 
 **Running the Application**
 1. Clone the repository to your local machine.
