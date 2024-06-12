@@ -6,8 +6,6 @@
  It provides methods to add, remove, update, display aircraft, and generate maintenance reports.
  */
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
