@@ -44,7 +44,9 @@ Prerequisites
 
 ![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/4de7ef59-e840-4f0a-95bb-6c9172af1342)
 
-PLEASE NOTE: In Intellij, after you create your own database in MySQL, you will have to manually point the project to the .jar file that is already included under lib. Please follow these instructions to get the database connected to the Java program. 
+**PLEASE NOTE:** 
+
+In Intellij, after you create your own database in MySQL, you will have to manually point the project to the .jar file that is already included under lib. Please follow these instructions to get the database connected to the Java program. 
 
 1. Go to ---> Main Menu
 
@@ -68,10 +70,9 @@ PLEASE NOTE: In Intellij, after you create your own database in MySQL, you will 
 
 
 **Running the Application**
-1. Clone the repository to your local machine.
-2. Open the project in your preferred IDE.
-3. Ensure all dependencies are resolved.
-4. Run the Main class to start the application.
+1. Open the project in your preferred IDE.
+2. Ensure all dependencies are resolved.
+3. Run the Main class to start the application.
    
 
 **Usage**
@@ -104,10 +105,6 @@ model,serialNumber,maintenanceStatus,missionHistory,pilotAssignment,lastInspecti
 **Error Handling**
 
 The application includes basic error handling for common issues such as invalid input formats and database connection errors. Error messages will be displayed to guide the user.
-
-**Testing**
-
-The project includes a comprehensive test plan covering functional, performance, security, reliability, usability, compatibility, integration, data integrity, scalability, and regression testing. Refer to the Software Test Plan document for detailed information.
 
 **Contact**
 
