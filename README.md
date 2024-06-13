@@ -98,9 +98,14 @@ The GUI provides a more user-friendly way to interact with the application. It i
 
 **CSV Upload**
 
-The CSV file should follow this format:
+The CSV file should follow this format if you were to create your own CSV and add your own aircraft infromation:
 Copy code
 model,serialNumber,maintenanceStatus,missionHistory,pilotAssignment,lastInspectionDate
+
+**Sample CSV Data**
+
+Sample CSV data that can be used to generate data into the MySQL database can be found within Ken_Danny_DMS-master/sample data/sample_aircraft_data.csv
+To use this sample data, you simply have to run the Java program and click 'Upload CSV' to upload aircraft information. 
 
 **Error Handling**
 
