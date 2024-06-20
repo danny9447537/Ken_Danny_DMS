@@ -29,8 +29,8 @@ public class Main {
         // Loop until a successful connection is established
         while (true) {
             // Prompting for MySQL credentials
-            System.out.print("Enter MySQL Server URL (e.g., jdbc:mysql://127.0.0.1:3306/ or " +
-                    "jdbc:mysql://localhost:3306/ ): ");
+            System.out.print("Enter MySQL Server URL (e.g., jdbc:mysql://127.0.0.1:3306 or " +
+                    "jdbc:mysql://localhost:3306 ): ");
             DB_URL = credentialScanner.nextLine();
 
             System.out.print("Enter MySQL User: ");
@@ -49,7 +49,7 @@ public class Main {
         }
 
         // Connecting the user to the database with the specific database URL
-        String databaseUrl = DB_URL + "aircraft_db";
+        String databaseUrl = DB_URL + "/aircraft_db";
         service = new AircraftService(databaseUrl, DB_USER, DB_PASSWORD);
         controller = new AircraftController(service, scanner);
         uiManager = new UserInterfaceManager(controller);
@@ -198,7 +198,7 @@ public class Main {
     private static void useDatabase(Connection connection) {
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("USE aircraft_db");
-            System.out.println("Switched to database 'aircraft_db'.");
+            System.out.println("Switched to database '/aircraft_db'.");
         } catch (SQLException e) {
             System.out.println("Error switching to database: " + e.getMessage());
         }
