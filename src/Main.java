@@ -53,6 +53,8 @@ public class Main {
 
         uiManager.initializeUI();
         uiManager.getMainFrame().setVisible(true);
+        uiManager.getMainFrame().toFront();
+        uiManager.getMainFrame().requestFocus();
 
         while (true) {
             System.out.println("Aircraft Database Management System");
@@ -199,6 +201,8 @@ public class Main {
                 }
                 sql.append(line);
                 if (line.trim().endsWith(";")) {
+                    // debugging line
+                    System.out.println("Executing SQL: " + sql.toString());
                     stmt.execute(sql.toString());
                     sql.setLength(0); // Reset the string builder for the next statement
                 }

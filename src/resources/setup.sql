@@ -1,3 +1,5 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
 -- setup.sql
 CREATE DATABASE IF NOT EXISTS aircraft_db;
 USE aircraft_db;
