@@ -172,7 +172,10 @@ public class Main {
             // Reconnect with the specific database URL
             String databaseUrl = initialUrl + "aircraft_db";
             try (Connection dbConnection = DriverManager.getConnection(databaseUrl, user, password)) {
-                setupDatabase(dbConnection); // Execute setup.sql if the database doesn't exist
+                // Execute the use statement
+                useDatabase(dbConnection);
+                // Execute setup.sql if the database doesn't exist
+                setupDatabase(dbConnection);
             }
             return true;
         } catch (SQLException e) {
@@ -188,6 +191,16 @@ public class Main {
             System.out.println("Database 'aircraft_db' created or already exists.");
         } catch (SQLException e) {
             System.out.println("Error creating database: " + e.getMessage());
+        }
+    }
+
+    // Method to switch to the created database
+    private static void useDatabase(Connection connection) {
+        try (Statement stmt = connection.createStatement()) {
+            stmt.executeUpdate("USE aircraft_db");
+            System.out.println("Switched to database 'aircraft_db'.");
+        } catch (SQLException e) {
+            System.out.println("Error switching to database: " + e.getMessage());
         }
     }
 
