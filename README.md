@@ -19,8 +19,7 @@ AircraftController: Provides methods to add, remove, update, display aircraft, a
 5.	User Interface: Manages the graphical user interface components.
 UserInterfaceManager: Creates and manages the GUI components of the application.
 6.	Main: Entry point for the application.
-
-7.AircraftRepositoryTest: Class specifically made for unit testing.
+7.	AircraftRepositoryTest: Class specifically made for unit testing.
 
 **Main:**
 
