@@ -28,24 +28,31 @@ public class Main {
 
         // Loop until a successful connection is established
         while (true) {
-            // Prompting for MySQL Credentials
-            System.out.println("Enter MySQL URL (e.g., jdbc:mysql://127.0.0.1:3306/aircraft_db): ");
+            // Prompting for MySQL credentials
+            System.out.print("Enter MySQL Server URL (e.g., jdbc:mysql://127.0.0.1:3306/ or " +
+                    "jdbc:mysql://localhost:3306/ ): ");
             DB_URL = credentialScanner.nextLine();
 
-            System.out.println("Enter MySQL USERNAME (e.g., root): ");
+            System.out.print("Enter MySQL User: ");
             DB_USER = credentialScanner.nextLine();
 
-            System.out.println("Enter MySQL PASSWORD (e.g., root): ");
+            System.out.print("Enter MySQL Password: ");
             DB_PASSWORD = credentialScanner.nextLine();
 
-            // Validating the connection and setup database, if necessary
+            // Validate the connection and setup database if necessary
             if (validateConnectionAndSetup(DB_URL, DB_USER, DB_PASSWORD)) {
-                System.out.println("Connection established and database setup successfully");
-                break;
+                System.out.println("Connection established and database setup successfully.");
+                break; // Exit loop once a successful connection is established
             } else {
                 System.out.println("Failed to connect to the database. Please check your credentials and try again.");
             }
         }
+
+        // Connecting the user to the database with the specific database URL
+        String databaseUrl = DB_URL + "aircraft_db";
+        service = new AircraftService(databaseUrl, DB_USER, DB_PASSWORD);
+        controller = new AircraftController(service, scanner);
+        uiManager = new UserInterfaceManager(controller);
 
         service = new AircraftService(DB_URL, DB_USER, DB_PASSWORD);
         controller = new AircraftController(service, scanner);
