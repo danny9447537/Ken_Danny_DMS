@@ -40,16 +40,39 @@ Prerequisites
    
 ![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/8fe7bcec-b78d-4604-ad5b-81740dcf6b9e)
 
-4.	Update the database connection details in the AircraftRepository class.
+4.	Update the database connection details in the Main class.
 
-![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/24ce3e3a-696a-4e24-866d-a1fb7cf6a4b4)
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/4de7ef59-e840-4f0a-95bb-6c9172af1342)
+
+**PLEASE NOTE:** 
+
+In Intellij, after you create your own database in MySQL, you will have to manually point the project to the .jar file that is already included under lib. Please follow these instructions to get the database connected to the Java program. 
+
+1. Go to ---> Main Menu
+
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/ada74998-b5d0-4110-9a47-672721e7721c)
+
+2. Navigate to --> Project Structure
+   
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/81395906-ca8d-4cff-a24b-15b9257ca33c)
+
+3. Click on ---> Modules --> Dependencies --> '+' sign to add the .jar file --> navigate to 
+
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/adb32150-d8a5-4014-b5e0-774356f94133)
+
+4. Navigate to the lib folder in this project to find mysql-connector-j-8.4.0.jar and add it as a dependency
+
+![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/49784262-7588-4402-97b6-ab7e56e0161c)
+
+5. Click 'Apply' and then 'OK'
+
+6. Run the Java program. 
 
 
 **Running the Application**
-1. Clone the repository to your local machine.
-2. Open the project in your preferred IDE.
-3. Ensure all dependencies are resolved.
-4. Run the Main class to start the application.
+1. Open the project in your preferred IDE.
+2. Ensure all dependencies are resolved.
+3. Run the Main class to start the application.
    
 
 **Usage**
@@ -75,17 +98,18 @@ The GUI provides a more user-friendly way to interact with the application. It i
 
 **CSV Upload**
 
-The CSV file should follow this format:
+The CSV file should follow this format if you were to create your own CSV and add your own aircraft infromation:
 Copy code
 model,serialNumber,maintenanceStatus,missionHistory,pilotAssignment,lastInspectionDate
+
+**Sample CSV Data**
+
+Sample CSV data that can be used to generate data into the MySQL database can be found within Ken_Danny_DMS-master/sample data/sample_aircraft_data.csv
+To use this sample data, you simply have to run the Java program and click 'Upload CSV' to upload aircraft information. 
 
 **Error Handling**
 
 The application includes basic error handling for common issues such as invalid input formats and database connection errors. Error messages will be displayed to guide the user.
-
-**Testing**
-
-The project includes a comprehensive test plan covering functional, performance, security, reliability, usability, compatibility, integration, data integrity, scalability, and regression testing. Refer to the Software Test Plan document for detailed information.
 
 **Contact**
 
