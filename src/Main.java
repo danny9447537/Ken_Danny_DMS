@@ -164,12 +164,15 @@ public class Main {
 
     // Method to validate the connection and setup the database
     private static boolean validateConnectionAndSetup(String url, String user, String password) {
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            // this is to check if the database exists
-            if (databaseExists(connection)) {
-                System.out.println("Database already exists. Skipping setup");
-            } else {
-                setupDatabase(connection);
+        String initialUrl = url;
+        try (Connection connection = DriverManager.getConnection(initialUrl, user, password)) {
+            // Create the database if it doesn't exist
+            createDatabaseIfNotExists(connection);
+
+            // Reconnect with the specific database URL
+            String databaseUrl = initialUrl + "aircraft_db";
+            try (Connection dbConnection = DriverManager.getConnection(databaseUrl, user, password)) {
+                setupDatabase(dbConnection); // Execute setup.sql if the database doesn't exist
             }
             return true;
         } catch (SQLException e) {
@@ -178,14 +181,13 @@ public class Main {
         }
     }
 
-    // Method to check if the database exists
-    private static boolean databaseExists(Connection connection) throws SQLException {
+    // Method to create the database if it doesn't exist
+    private static void createDatabaseIfNotExists(Connection connection) {
         try (Statement stmt = connection.createStatement()) {
-            stmt.executeQuery("USE aircraft_db");
-            return true;
+            stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS aircraft_db");
+            System.out.println("Database 'aircraft_db' created or already exists.");
         } catch (SQLException e) {
-            // Database does not exist
-            return false;
+            System.out.println("Error creating database: " + e.getMessage());
         }
     }
 
