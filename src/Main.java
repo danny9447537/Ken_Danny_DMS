@@ -29,8 +29,8 @@ public class Main {
         // Loop until a successful connection is established
         while (true) {
             // Prompting for MySQL credentials
-            System.out.print("Enter MySQL Server URL (e.g., jdbc:mysql://127.0.0.1:3306 or " +
-                    "jdbc:mysql://localhost:3306 ): ");
+            System.out.print("Enter MySQL Server URL (e.g., jdbc:mysql://127.0.0.1:3306/ or " +
+                    "jdbc:mysql://localhost:3306/ ): ");
             DB_URL = credentialScanner.nextLine();
 
             System.out.print("Enter MySQL User: ");
@@ -49,7 +49,7 @@ public class Main {
         }
 
         // Connecting the user to the database with the specific database URL
-        String databaseUrl = DB_URL + "/aircraft_db";
+        String databaseUrl = DB_URL + "aircraft_db";
         service = new AircraftService(databaseUrl, DB_USER, DB_PASSWORD);
         controller = new AircraftController(service, scanner);
         uiManager = new UserInterfaceManager(controller);
@@ -145,7 +145,7 @@ public class Main {
         }
     }
 
-    // Getter methods to access the private fields
+    // getter methods to access the private fieds for the DB
     public static String getDbUrl() {
         return DB_URL;
     }
@@ -160,13 +160,17 @@ public class Main {
 
     // Method to validate the connection and setup the database
     private static boolean validateConnectionAndSetup(String url, String user, String password) {
-        try (Connection initialConnection = DriverManager.getConnection(url, user, password)) {
+        String initialUrl = url;
+        try (Connection connection = DriverManager.getConnection(initialUrl, user, password)) {
             // Create the database if it doesn't exist
-            createDatabaseIfNotExists(initialConnection);
+            createDatabaseIfNotExists(connection);
 
-            // Reconnect with the specific database URL and set it up
-            String databaseUrl = url + "aircraft_db";
+            // Reconnect with the specific database URL
+            String databaseUrl = initialUrl + "aircraft_db";
             try (Connection dbConnection = DriverManager.getConnection(databaseUrl, user, password)) {
+                // Execute the use statement
+                useDatabase(dbConnection);
+                // Execute setup.sql if the database doesn't exist
                 setupDatabase(dbConnection);
             }
             return true;
@@ -186,6 +190,16 @@ public class Main {
         }
     }
 
+    // Method to switch to the created database
+    private static void useDatabase(Connection connection) {
+        try (Statement stmt = connection.createStatement()) {
+            stmt.executeUpdate("USE aircraft_db");
+            System.out.println("Switched to database 'aircraft_db'.");
+        } catch (SQLException e) {
+            System.out.println("Error switching to database: " + e.getMessage());
+        }
+    }
+
     // Method to setup the database using the setup.sql file
     private static void setupDatabase(Connection connection) {
         InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("resources/setup.sql");
@@ -201,12 +215,14 @@ public class Main {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.trim().isEmpty() || line.startsWith("--")) {
-                    continue;
+                    continue; // Skip empty lines and comments
                 }
                 sql.append(line);
                 if (line.trim().endsWith(";")) {
+                    // debugging line
+                    System.out.println("Executing SQL: " + sql.toString());
                     stmt.execute(sql.toString());
-                    sql.setLength(0);
+                    sql.setLength(0); // Reset the string builder for the next statement
                 }
             }
             System.out.println("Database setup completed successfully.");
