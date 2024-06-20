@@ -19,6 +19,7 @@ AircraftController: Provides methods to add, remove, update, display aircraft, a
 5.	User Interface: Manages the graphical user interface components.
 UserInterfaceManager: Creates and manages the GUI components of the application.
 6.	Main: Entry point for the application.
+7.AircraftRepositoryTest: Class specifically made for unit testing.
 
 **Main:**
 
@@ -34,45 +35,15 @@ Prerequisites
 
 
 **Database Setup**
-
-1.	Install MySQL and create a database named aircraft_db.
-2.	Create a table named aircraft with the following schema:
-   
-![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/8fe7bcec-b78d-4604-ad5b-81740dcf6b9e)
-
-4.	Update the database connection details in the Main class.
-
-![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/4de7ef59-e840-4f0a-95bb-6c9172af1342)
-
-**PLEASE NOTE:** 
-
-In Intellij, after you create your own database in MySQL, you will have to manually point the project to the .jar file that is already included under lib. Please follow these instructions to get the database connected to the Java program. 
-
-1. Go to ---> Main Menu
-
-![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/ada74998-b5d0-4110-9a47-672721e7721c)
-
-2. Navigate to --> Project Structure
-   
-![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/81395906-ca8d-4cff-a24b-15b9257ca33c)
-
-3. Click on ---> Modules --> Dependencies --> '+' sign to add the .jar file --> navigate to 
-
-![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/adb32150-d8a5-4014-b5e0-774356f94133)
-
-4. Navigate to the lib folder in this project to find mysql-connector-j-8.4.0.jar and add it as a dependency
-
-![image](https://github.com/danny9447537/Ken_Danny_DMS/assets/92329761/49784262-7588-4402-97b6-ab7e56e0161c)
-
-5. Click 'Apply' and then 'OK'
-
-6. Run the Java program. 
-
+1. The program will prompt the user to enter in their credentials.
+2. If YOUR hostname connection starts with an ip address, then you will use that ip address within the URL in this location jdbc:mysql://"YOUR IP ADDRESS":3306/.
+4. If YOUR hostname is just the default localhost, then you will use the name "localhost" within the URL in this location jdbc:mysql://localhost:3306/
+5. It should be either jdbc:mysql://localhost:3306/ OR jdbc:mysql://127.0.0.1:3306/
 
 **Running the Application**
 1. Open the project in your preferred IDE.
 2. Ensure all dependencies are resolved.
-3. Run the Main class to start the application.
+3. Run the Main.java class to start the application.
    
 
 **Usage**
@@ -110,6 +81,9 @@ To use this sample data, you simply have to run the Java program and click 'Uplo
 **Error Handling**
 
 The application includes basic error handling for common issues such as invalid input formats and database connection errors. Error messages will be displayed to guide the user.
+
+**AircraftRepositoryTest Class**
+This class is used for unit testing. There are multiple methods to test the CRUD functinality of the AircraftRepository class within the test class. 
 
 **Contact**
 
