@@ -54,10 +54,6 @@ public class Main {
         controller = new AircraftController(service, scanner);
         uiManager = new UserInterfaceManager(controller);
 
-        service = new AircraftService(DB_URL, DB_USER, DB_PASSWORD);
-        controller = new AircraftController(service, scanner);
-        uiManager = new UserInterfaceManager(controller);
-
         uiManager.initializeUI();
         uiManager.getMainFrame().setVisible(true);
         uiManager.getMainFrame().toFront();
