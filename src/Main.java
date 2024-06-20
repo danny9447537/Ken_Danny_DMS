@@ -149,7 +149,7 @@ public class Main {
         }
     }
 
-    // getter methods to access the private fieds for the DB
+    // Getter methods to access the private fields
     public static String getDbUrl() {
         return DB_URL;
     }
@@ -164,17 +164,13 @@ public class Main {
 
     // Method to validate the connection and setup the database
     private static boolean validateConnectionAndSetup(String url, String user, String password) {
-        String initialUrl = url;
-        try (Connection connection = DriverManager.getConnection(initialUrl, user, password)) {
+        try (Connection initialConnection = DriverManager.getConnection(url, user, password)) {
             // Create the database if it doesn't exist
-            createDatabaseIfNotExists(connection);
+            createDatabaseIfNotExists(initialConnection);
 
-            // Reconnect with the specific database URL
-            String databaseUrl = initialUrl + "/aircraft_db";
+            // Reconnect with the specific database URL and set it up
+            String databaseUrl = url + "aircraft_db";
             try (Connection dbConnection = DriverManager.getConnection(databaseUrl, user, password)) {
-                // Execute the use statement
-                useDatabase(dbConnection);
-                // Execute setup.sql if the database doesn't exist
                 setupDatabase(dbConnection);
             }
             return true;
@@ -194,16 +190,6 @@ public class Main {
         }
     }
 
-    // Method to switch to the created database
-    private static void useDatabase(Connection connection) {
-        try (Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate("USE aircraft_db");
-            System.out.println("Switched to database '/aircraft_db'.");
-        } catch (SQLException e) {
-            System.out.println("Error switching to database: " + e.getMessage());
-        }
-    }
-
     // Method to setup the database using the setup.sql file
     private static void setupDatabase(Connection connection) {
         InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("resources/setup.sql");
@@ -219,14 +205,12 @@ public class Main {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.trim().isEmpty() || line.startsWith("--")) {
-                    continue; // Skip empty lines and comments
+                    continue;
                 }
                 sql.append(line);
                 if (line.trim().endsWith(";")) {
-                    // debugging line
-                    System.out.println("Executing SQL: " + sql.toString());
                     stmt.execute(sql.toString());
-                    sql.setLength(0); // Reset the string builder for the next statement
+                    sql.setLength(0);
                 }
             }
             System.out.println("Database setup completed successfully.");
