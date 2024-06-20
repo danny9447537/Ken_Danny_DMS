@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +37,7 @@ public class UserInterfaceManager {
     private JButton reportButton;
     private JButton uploadCSVButton;
     private JButton deleteAllButton;
+    //private JButton setupDBButton;
 
     private AircraftController controller;
     /*
@@ -143,7 +147,7 @@ public class UserInterfaceManager {
     // Method to create the buttons panel.
     private void createButtonsPanel() {
         JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new GridLayout(1, 7, 10, 10));
+        buttonsPanel.setLayout(new GridLayout(1, 8, 10, 20));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         addButton = new JButton("Add Aircraft");
@@ -153,6 +157,7 @@ public class UserInterfaceManager {
         reportButton = new JButton("Generate Maintenance Report");
         uploadCSVButton = new JButton("Upload CSV");
         deleteAllButton = new JButton("Delete All Aircraft Data");
+        //setupDBButton = new JButton("Setup Database");
 
         addButton.addActionListener(new ButtonClickListener());
         removeButton.addActionListener(new ButtonClickListener());
@@ -161,6 +166,7 @@ public class UserInterfaceManager {
         reportButton.addActionListener(new ButtonClickListener());
         uploadCSVButton.addActionListener(new ButtonClickListener());
         deleteAllButton.addActionListener(new ButtonClickListener());
+        //setupDBButton.addActionListener(new ButtonClickListener());
 
         buttonsPanel.add(addButton);
         buttonsPanel.add(removeButton);
@@ -169,6 +175,7 @@ public class UserInterfaceManager {
         buttonsPanel.add(reportButton);
         buttonsPanel.add(uploadCSVButton);
         buttonsPanel.add(deleteAllButton);
+        //buttonsPanel.add(setupDBButton);
 
         mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
     }
@@ -187,6 +194,7 @@ public class UserInterfaceManager {
                 + "5. Generate Maintenance Report: Enter the serial number and click 'Generate Maintenance Report'.<br>"
                 + "6. Upload CSV: Click 'Upload CSV' to upload a CSV file with aircraft details.<br>"
                 + "7. Delete All Aircraft Data: Click 'Delete All Aircraft Data' to remove all aircraft records from the database."
+                + "8. Setup Database: Click 'Setup Database' to initialize the database structure."
                 + "</html>");
         instructionsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         instructionsPanel.add(instructions, BorderLayout.CENTER);
@@ -439,6 +447,23 @@ public class UserInterfaceManager {
         }
     }
 
+    // Method to handle database setup
+//    private void handleSetupDatabase() {
+//        // Change: Added method to handle database setup
+//        try (Connection conn = DriverManager.getConnection(Main.getDbUrl(), Main.getDbUser(), Main.getDbPassword());
+//             Statement stmt = conn.createStatement()) {
+//            BufferedReader br = new BufferedReader(new FileReader("Ken_Danny_DMS-master/resources/setup.sql"));
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                stmt.execute(line);
+//            }
+//            br.close();
+//            JOptionPane.showMessageDialog(mainFrame, "Database setup completed successfully.");
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(mainFrame, "An error occurred during database setup: " + e.getMessage());
+//        }
+//    }
+
     // Method to parse a date string.
     private Date parseDate(String dateString) throws ParseException {
         if (dateString == null || dateString.trim().isEmpty()) {
@@ -465,6 +490,8 @@ public class UserInterfaceManager {
                 handleUploadCSV();
             } else if (e.getSource() == deleteAllButton) {
                 handleDeleteAllAircraft();
+//            } else if (e.getSource() == setupDBButton) {
+//                handleSetupDatabase();
             }
         }
     }

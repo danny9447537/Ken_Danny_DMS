@@ -6,22 +6,51 @@
  It provides a simple command-line interface to interact with the system.
  */
 
+import java.io.*;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/aircraft_db";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "password";
+    private static String DB_URL;
+    private static String DB_USER;
+    private static String DB_PASSWORD;
 
-    private static AircraftService service = new AircraftService(DB_URL, DB_USER, DB_PASSWORD);
+    private static AircraftService service;
     private static Scanner scanner = new Scanner(System.in);
-    private static AircraftController controller = new AircraftController(service, scanner);
-    private static UserInterfaceManager uiManager = new UserInterfaceManager(controller);
+    private static AircraftController controller;
+    private static UserInterfaceManager uiManager;
 
     public static void main(String[] args) {
+        Scanner credentialScanner = new Scanner(System.in);
+
+        // Loop until a successful connection is established
+        while (true) {
+            // Prompting for MySQL Credentials
+            System.out.println("Enter MySQL URL (e.g., jdbc:mysql://127.0.0.1:3306/aircraft_db): ");
+            DB_URL = credentialScanner.nextLine();
+
+            System.out.println("Enter MySQL USERNAME (e.g., root): ");
+            DB_USER = credentialScanner.nextLine();
+
+            System.out.println("Enter MySQL PASSWORD (e.g., root): ");
+            DB_PASSWORD = credentialScanner.nextLine();
+
+            // Validating the connection and setup database, if necessary
+            if (validateConnectionAndSetup(DB_URL, DB_USER, DB_PASSWORD)) {
+                System.out.println("Connection established and database setup successfully");
+                break;
+            } else {
+                System.out.println("Failed to connect to the database. Please check your credentials and try again.");
+            }
+        }
+
+        service = new AircraftService(DB_URL, DB_USER, DB_PASSWORD);
+        controller = new AircraftController(service, scanner);
+        uiManager = new UserInterfaceManager(controller);
+
         uiManager.initializeUI();
         uiManager.getMainFrame().setVisible(true);
 
@@ -108,6 +137,75 @@ public class Main {
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
+        }
+    }
+
+    // getter methods to access the private fieds for the DB
+    public static String getDbUrl() {
+        return DB_URL;
+    }
+
+    public static String getDbUser() {
+        return DB_USER;
+    }
+
+    public static String getDbPassword() {
+        return DB_PASSWORD;
+    }
+
+    // Method to validate the connection and setup the database
+    private static boolean validateConnectionAndSetup(String url, String user, String password) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            // this is to check if the database exists
+            if (databaseExists(connection)) {
+                System.out.println("Database already exists. Skipping setup");
+            } else {
+                setupDatabase(connection);
+            }
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Method to check if the database exists
+    private static boolean databaseExists(Connection connection) throws SQLException {
+        try (Statement stmt = connection.createStatement()) {
+            stmt.executeQuery("USE aircraft_db");
+            return true;
+        } catch (SQLException e) {
+            // Database does not exist
+            return false;
+        }
+    }
+
+    // Method to setup the database using the setup.sql file
+    private static void setupDatabase(Connection connection) {
+        InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("resources/setup.sql");
+        if (inputStream == null) {
+            System.out.println("Error: setup.sql file not found in the classpath.");
+            return;
+        }
+
+        try (Statement stmt = connection.createStatement();
+             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+
+            StringBuilder sql = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.trim().isEmpty() || line.startsWith("--")) {
+                    continue; // Skip empty lines and comments
+                }
+                sql.append(line);
+                if (line.trim().endsWith(";")) {
+                    stmt.execute(sql.toString());
+                    sql.setLength(0); // Reset the string builder for the next statement
+                }
+            }
+            System.out.println("Database setup completed successfully.");
+        } catch (IOException | SQLException e) {
+            System.out.println("Error during database setup: " + e.getMessage());
         }
     }
 }
