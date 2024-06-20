@@ -170,7 +170,7 @@ public class Main {
             createDatabaseIfNotExists(connection);
 
             // Reconnect with the specific database URL
-            String databaseUrl = initialUrl + "aircraft_db";
+            String databaseUrl = initialUrl + "/aircraft_db";
             try (Connection dbConnection = DriverManager.getConnection(databaseUrl, user, password)) {
                 // Execute the use statement
                 useDatabase(dbConnection);
