@@ -65,6 +65,8 @@ public class UserInterfaceManager {
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+        // background color for main panel
+        mainPanel.setBackground(Color.LIGHT_GRAY);
         mainFrame.add(mainPanel, BorderLayout.CENTER);
     }
 
@@ -116,28 +118,42 @@ public class UserInterfaceManager {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(7, 2, 10, 10));
         formPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // white form panel
+        formPanel.setBackground(Color.WHITE);
 
-        formPanel.add(new JLabel("Model:"));
+        JLabel modelLabel = new JLabel("Model:");
+        modelLabel.setForeground(Color.BLUE);
+        formPanel.add(modelLabel);
         modelField = new JTextField();
         formPanel.add(modelField);
 
-        formPanel.add(new JLabel("Serial Number:"));
+        JLabel serialNumberLabel = new JLabel("Serial Number:");
+        serialNumberLabel.setForeground(Color.BLUE); // Set text color for serialNumberLabel
+        formPanel.add(serialNumberLabel);
         serialNumberField = new JTextField();
         formPanel.add(serialNumberField);
 
-        formPanel.add(new JLabel("Maintenance Status:"));
+        JLabel maintenanceStatusLabel = new JLabel("Maintenance Status:");
+        maintenanceStatusLabel.setForeground(Color.BLUE); // Set text color for maintenanceStatusLabel
+        formPanel.add(maintenanceStatusLabel);
         maintenanceStatusField = new JComboBox<>(new String[]{"Active", "Inactive"});
         formPanel.add(maintenanceStatusField);
 
-        formPanel.add(new JLabel("Mission History:"));
+        JLabel missionHistoryLabel = new JLabel("Mission History:");
+        missionHistoryLabel.setForeground(Color.BLUE);
+        formPanel.add(missionHistoryLabel);
         missionHistoryField = new JTextField();
         formPanel.add(missionHistoryField);
 
-        formPanel.add(new JLabel("Pilot Assignment:"));
+        JLabel pilotAssignmentLabel = new JLabel("Pilot Assignment:");
+        pilotAssignmentLabel.setForeground(Color.BLUE);
+        formPanel.add(pilotAssignmentLabel);
         pilotAssignmentField = new JTextField();
         formPanel.add(pilotAssignmentField);
 
-        formPanel.add(new JLabel("Last Inspection Date (yyyy-MM-dd):"));
+        JLabel lastInspectionDateLabel = new JLabel("Last Inspection Date (yyyy-MM-dd):");
+        lastInspectionDateLabel.setForeground(Color.BLUE);
+        formPanel.add(lastInspectionDateLabel);
         lastInspectionDateField = new JTextField();
         formPanel.add(lastInspectionDateField);
 
@@ -149,14 +165,23 @@ public class UserInterfaceManager {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 8, 10, 20));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        buttonsPanel.setBackground(Color.GRAY);
 
         addButton = new JButton("Add Aircraft");
+        addButton.setForeground(Color.BLUE);
         removeButton = new JButton("Remove Aircraft");
+        removeButton.setForeground(Color.BLUE);
         updateButton = new JButton("Update Aircraft");
+        updateButton.setForeground(Color.BLUE);
         displayButton = new JButton("Display All Aircraft");
+        displayButton.setForeground(Color.BLUE);
         reportButton = new JButton("Generate Maintenance Report");
+        reportButton.setForeground(Color.BLUE);
         uploadCSVButton = new JButton("Upload CSV");
+        uploadCSVButton.setForeground(Color.BLUE);
         deleteAllButton = new JButton("Delete All Aircraft Data");
+        deleteAllButton.setForeground(Color.BLUE);
+
         //setupDBButton = new JButton("Setup Database");
 
         addButton.addActionListener(new ButtonClickListener());
@@ -185,6 +210,7 @@ public class UserInterfaceManager {
         JPanel instructionsPanel = new JPanel();
         instructionsPanel.setLayout(new BorderLayout());
         instructionsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        instructionsPanel.setBackground(Color.LIGHT_GRAY);
         JLabel instructions = new JLabel("<html>"
                 + "<b>Instructions:</b><br>"
                 + "1. Add Aircraft: Enter all fields and click 'Add Aircraft'.<br>"
@@ -196,6 +222,7 @@ public class UserInterfaceManager {
                 + "7. Delete All Aircraft Data: Click 'Delete All Aircraft Data' to remove all aircraft records from the database."
                 + "8. Setup Database: Click 'Setup Database' to initialize the database structure."
                 + "</html>");
+        instructions.setForeground(Color.DARK_GRAY);
         instructionsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         instructionsPanel.add(instructions, BorderLayout.CENTER);
         mainPanel.add(instructionsPanel, BorderLayout.NORTH);
