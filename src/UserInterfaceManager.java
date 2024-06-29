@@ -138,7 +138,7 @@ public class UserInterfaceManager {
 
         // setting text blue for maintenance status
         JLabel maintenanceStatusLabel = new JLabel("Maintenance Status:");
-        maintenanceStatusLabel.setForeground(Color.BLUE); // Set text color for maintenanceStatusLabel
+        maintenanceStatusLabel.setForeground(Color.BLUE);
         formPanel.add(maintenanceStatusLabel);
         maintenanceStatusField = new JComboBox<>(new String[]{"Active", "Inactive"});
         formPanel.add(maintenanceStatusField);

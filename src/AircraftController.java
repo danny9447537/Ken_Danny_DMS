@@ -44,7 +44,7 @@ public class AircraftController {
             System.out.println("No aircraft found.");
         } else {
             for (Aircraft aircraft : aircraftList) {
-                System.out.println(aircraft);
+                System.out.println(aircraft.toString());
             }
         }
     }
