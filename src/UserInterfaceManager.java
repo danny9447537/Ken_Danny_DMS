@@ -234,7 +234,6 @@ public class UserInterfaceManager {
                 + "5. Generate Maintenance Report: Enter the serial number and click 'Generate Maintenance Report'.<br>"
                 + "6. Upload CSV: Click 'Upload CSV' to upload a CSV file with aircraft details.<br>"
                 + "7. Delete All Aircraft Data: Click 'Delete All Aircraft Data' to remove all aircraft records from the database."
-                + "8. Setup Database: Click 'Setup Database' to initialize the database structure."
                 + "</html>");
         instructions.setForeground(Color.DARK_GRAY);
         instructionsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
