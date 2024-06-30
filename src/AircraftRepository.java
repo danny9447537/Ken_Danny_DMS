@@ -125,12 +125,12 @@ public class AircraftRepository {
                         rs.getString("pilotAssignment"),
                         rs.getDate("lastInspectionDate")
                 );
-                aircraftList.add(aircraft); // Ensure to add aircraft to the list
+                aircraftList.add(aircraft);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return aircraftList; // Return the list properly
+        return aircraftList;
     }
 
     public Aircraft getAircraftBySerialNumber(String serialNumber) {

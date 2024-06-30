@@ -131,7 +131,7 @@ public class UserInterfaceManager {
 
         // setting text blue for serial number
         JLabel serialNumberLabel = new JLabel("Serial Number:");
-        serialNumberLabel.setForeground(Color.BLUE); // Set text color for serialNumberLabel
+        serialNumberLabel.setForeground(Color.BLUE);
         formPanel.add(serialNumberLabel);
         serialNumberField = new JTextField();
         formPanel.add(serialNumberField);
