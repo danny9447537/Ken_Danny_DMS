@@ -17,7 +17,7 @@ class AircraftRepositoryTest {
     @BeforeAll
     public static void setUp() {
         aircraftRepository = new AircraftRepository(DB_URL, DB_USER, DB_PASSWORD);
-        // This ensures the database is clean before starting tests
+        // This ensures the database is clean before starting test
         aircraftRepository.deleteAllAircraft();
     }
 

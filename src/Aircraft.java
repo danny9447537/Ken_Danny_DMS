@@ -84,4 +84,17 @@ public class Aircraft {
     public void setLastInspectionDate(Date lastInspectionDate) {
         this.lastInspectionDate = lastInspectionDate;
     }
+
+    // added to string functionality to fix the issue with temrinal not working
+    @Override
+    public String toString() {
+        return "Aircraft{" +
+                "model='" + model + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", maintenanceStatus='" + maintenanceStatus + '\'' +
+                ", missionHistory='" + missionHistory + '\'' +
+                ", pilotAssignment='" + pilotAssignment + '\'' +
+                ", lastInspectionDate=" + lastInspectionDate +
+                '}';
+    }
 }

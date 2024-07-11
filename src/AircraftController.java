@@ -22,9 +22,8 @@ public class AircraftController {
 
     // Method to add a new aircraft via GUI.
     public void addAircraft(String model, String serialNumber, String maintenanceStatus, String missionHistory,
-                            String pilotAssignment, Date lastInspectionDate, String discrepancies) {
-        Aircraft aircraft = new Aircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment,
-                lastInspectionDate, discrepancies);
+                            String pilotAssignment, Date lastInspectionDate) {
+        Aircraft aircraft = new Aircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
         service.addAircraft(aircraft);
     }
 
@@ -34,10 +33,8 @@ public class AircraftController {
     }
 
     // Method to update an aircraft's maintenance status and last inspection date via GUI.
-    public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus,
-                               String missionHistory, String pilotAssignment, Date lastInspectionDate, String discrepancies) {
-        service.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory,
-                pilotAssignment, lastInspectionDate, discrepancies);
+    public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus, String missionHistory, String pilotAssignment, Date lastInspectionDate) {
+        service.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
     }
 
     // Method to display all aircraft via CLI.
@@ -47,7 +44,7 @@ public class AircraftController {
             System.out.println("No aircraft found.");
         } else {
             for (Aircraft aircraft : aircraftList) {
-                System.out.println("Model: " + aircraft.getModel());
+                System.out.println(aircraft);
             }
         }
     }
@@ -62,7 +59,6 @@ public class AircraftController {
             System.out.println("Mission History: " + aircraft.getMissionHistory());
             System.out.println("Pilot Assignment: " + aircraft.getPilotAssignment());
             System.out.println("Last Inspection Date: " + aircraft.getLastInspectionDate());
-            System.out.println("Discrepancies: " + aircraft.getDiscrepancies());
         } else {
             System.out.println("Aircraft with serial number " + serialNumber + " not found.");
         }
