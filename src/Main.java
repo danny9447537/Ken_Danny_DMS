@@ -1,3 +1,10 @@
+/*
+ Danny Ken
+ 202430-CEN-3024C-31950
+ 7/10/2024
+ The Main class serves as the entry point for the Aircraft Database Management System application.
+ It provides a simple command-line interface to interact with the system.
+ */
 import java.io.*;
 import java.sql.*;
 import java.text.ParseException;
