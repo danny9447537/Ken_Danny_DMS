@@ -15,18 +15,27 @@ public class Aircraft {
     private String missionHistory;
     private String pilotAssignment;
     private Date lastInspectionDate;
+    private String discrepancies;
 
     public Aircraft(String model, String serialNumber, String maintenanceStatus, String missionHistory,
-                    String pilotAssignment, Date lastInspectionDate) {
+                    String pilotAssignment, Date lastInspectionDate, String discrepancies) {
         this.model = model;
         this.serialNumber = serialNumber;
         this.maintenanceStatus = maintenanceStatus;
         this.missionHistory = missionHistory;
         this.pilotAssignment = pilotAssignment;
         this.lastInspectionDate = lastInspectionDate;
+        this.discrepancies = discrepancies;
     }
 
     // Getters and setters
+    public String getDiscrepancies() {
+        return discrepancies;
+    }
+
+    public void setDiscrepancies(String discrepancies) {
+        this.discrepancies = discrepancies;
+    }
 
     public String getModel() {
         return model;

@@ -20,8 +20,11 @@ public class AircraftService {
         repository.addAircraft(aircraft);
     }
 
-    public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus, String missionHistory, String pilotAssignment, Date lastInspectionDate) {
-        repository.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
+    public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus,
+                               String missionHistory, String pilotAssignment, Date lastInspectionDate,
+                               String discrepancies) {
+        repository.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory,
+                pilotAssignment, lastInspectionDate, discrepancies);
     }
 
     public void removeAircraft(String serialNumber) {

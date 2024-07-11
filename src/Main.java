@@ -1,11 +1,3 @@
-/*
- Danny Ken
- 202430-CEN-3024C-31950
- 6/5/2024
- The Main class serves as the entry point for the Aircraft Database Management System application.
- It provides a simple command-line interface to interact with the system.
- */
-
 import java.io.*;
 import java.sql.*;
 import java.text.ParseException;
@@ -85,13 +77,15 @@ public class Main {
                     String pilotAssignment = scanner.nextLine();
                     System.out.print("Enter last inspection date (yyyy-MM-dd): ");
                     String dateString = scanner.nextLine();
+                    System.out.print("Enter discrepancies: ");
+                    String discrepancies = scanner.nextLine();
                     try {
                         if (dateString == null || dateString.trim().isEmpty()) {
                             System.out.println("Date string cannot be null or empty.");
                             break;
                         }
                         Date lastInspectionDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
-                        controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
+                        controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
                         System.out.println("Aircraft added successfully.");
                     } catch (ParseException e) {
                         System.out.println("Invalid date format. Please enter the date in yyyy-MM-dd format.");
@@ -118,9 +112,11 @@ public class Main {
                     pilotAssignment = scanner.nextLine();
                     System.out.print("Enter new last inspection date (yyyy-MM-dd): ");
                     dateString = scanner.nextLine();
+                    System.out.print("Enter new discrepancies: ");
+                    discrepancies = scanner.nextLine();
                     try {
                         Date lastInspectionDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
-                        controller.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
+                        controller.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
                         System.out.println("Aircraft updated successfully.");
                     } catch (ParseException e) {
                         System.out.println("Invalid date format. Please enter the date in yyyy-MM-dd format.");
@@ -145,7 +141,7 @@ public class Main {
         }
     }
 
-    // getter methods to access the private fieds for the DB
+    // getter methods to access the private fields for the DB
     public static String getDbUrl() {
         return DB_URL;
     }

@@ -47,7 +47,8 @@ public class AircraftRepository {
     }
 
     public void addAircraft(Aircraft aircraft) {
-        String sql = "INSERT INTO aircraft (model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO aircraft (model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, " +
+                "lastInspectionDate, discrepancies) VALUES(?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             if (conn == null) {
@@ -59,6 +60,7 @@ public class AircraftRepository {
             pstmt.setString(4, aircraft.getMissionHistory());
             pstmt.setString(5, aircraft.getPilotAssignment());
             pstmt.setDate(6, new java.sql.Date(aircraft.getLastInspectionDate().getTime()));
+            pstmt.setString(7, aircraft.getDiscrepancies());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -79,12 +81,14 @@ public class AircraftRepository {
         }
     }
 
-    public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus, String missionHistory, String pilotAssignment, Date lastInspectionDate) {
+    public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus,
+                               String missionHistory, String pilotAssignment, Date lastInspectionDate, String discrepancies) {
         if (!aircraftExists(serialNumber)) {
             throw new RuntimeException("Aircraft with serial number " + serialNumber + " does not exist.");
         }
 
-        String sql = "UPDATE aircraft SET model = ?, serialNumber = ?, maintenanceStatus = ?, missionHistory = ?, pilotAssignment = ?, lastInspectionDate = ? WHERE serialNumber = ?";
+        String sql = "UPDATE aircraft SET model = ?, serialNumber = ?, maintenanceStatus = ?, missionHistory = ?, " +
+                "pilotAssignment = ?, lastInspectionDate = ?, discrepancies = ? WHERE serialNumber = ?";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             if (conn == null) {
@@ -96,7 +100,8 @@ public class AircraftRepository {
             pstmt.setString(4, missionHistory);
             pstmt.setString(5, pilotAssignment);
             pstmt.setDate(6, new java.sql.Date(lastInspectionDate.getTime()));
-            pstmt.setString(7, serialNumber);
+            pstmt.setString(7, discrepancies);
+            pstmt.setString(8, serialNumber);
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Updating aircraft failed, no rows affected.");
@@ -123,14 +128,15 @@ public class AircraftRepository {
                         rs.getString("maintenanceStatus"),
                         rs.getString("missionHistory"),
                         rs.getString("pilotAssignment"),
-                        rs.getDate("lastInspectionDate")
+                        rs.getDate("lastInspectionDate"),
+                        rs.getString("discrepancies")
                 );
-                aircraftList.add(aircraft); // Ensure to add aircraft to the list
+                aircraftList.add(aircraft);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return aircraftList; // Return the list properly
+        return aircraftList;
     }
 
     public Aircraft getAircraftBySerialNumber(String serialNumber) {
@@ -150,7 +156,8 @@ public class AircraftRepository {
                         rs.getString("maintenanceStatus"),
                         rs.getString("missionHistory"),
                         rs.getString("pilotAssignment"),
-                        rs.getDate("lastInspectionDate")
+                        rs.getDate("lastInspectionDate"),
+                        rs.getString("discrepancies")
                 );
             }
         } catch (SQLException e) {

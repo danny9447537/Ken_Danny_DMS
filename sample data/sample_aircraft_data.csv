@@ -1,31 +1,51 @@
-Model,SerialNumber,MaintenanceStatus,MissionHistory,PilotAssignment,LastInspectionDate
-F-16,F16-001,Active,Training missions,Captain John Doe,2023-01-15
-F-22,F22-002,Inactive,Combat missions,Lieutenant Jane Smith,2022-12-10
-A-10,A10-003,Active,Support missions,Captain Michael Brown,2023-02-20
-C-130,C130-004,Active,Transport missions,Major Linda Johnson,2023-03-18
-B-2,B2-005,Inactive,Stealth missions,Colonel Richard Davis,2022-11-25
-KC-135,KC135-006,Active,Refueling missions,Captain Emily White,2023-04-12
-E-3,E3-007,Active,Surveillance missions,Lieutenant Chris Green,2023-01-30
-MQ-9,MQ9-008,Inactive,Reconnaissance missions,Major Laura Blue,2022-10-05
-F-15,F15-009,Active,Air superiority missions,Lieutenant James Black,2023-02-14
-F-35,F35-010,Active,Multi-role missions,Colonel Sarah Gold,2023-03-01
-B-1,B1-011,Inactive,Long-range bombing,Major Robert Grey,2022-11-15
-C-5,C5-012,Active,Heavy transport missions,Colonel Patricia Silver,2023-03-25
-T-38,T38-013,Active,Training missions,Lieutenant Kelly Brown,2023-01-18
-RQ-4,RQ4-014,Inactive,High-altitude surveillance,Major Benjamin Green,2022-12-01
-F-117,F117-015,Inactive,Stealth attack missions,Colonel Samuel White,2022-11-05
-HH-60,HH60-016,Active,Combat search and rescue,Lieutenant Daniel Black,2023-02-22
-MC-130,MC130-017,Active,Special operations missions,Major Rachel Red,2023-04-08
-CV-22,CV22-018,Inactive,Tiltrotor missions,Captain Amanda Blue,2022-10-20
-HC-130,HC130-019,Active,Rescue missions,Lieutenant Jason Gold,2023-01-05
-AC-130,AC130-020,Active,Gunship missions,Major Monica Pink,2023-03-12
-KC-10,KC10-021,Inactive,Aerial refueling,Colonel Paul Brown,2022-12-15
-E-8,E8-022,Active,Ground surveillance,Captain Theresa Green,2023-01-22
-EC-130,EC130-023,Active,Electronic warfare,Lieutenant Adam White,2023-02-28
-F-5,F5-024,Inactive,Aggressor training,Major Heather Grey,2022-11-18
-T-6,T6-025,Active,Training missions,Lieutenant Justin Blue,2023-03-06
-U-2,U2-026,Inactive,Reconnaissance,Colonel Aaron Red,2022-12-20
-RC-135,RC135-027,Active,Reconnaissance missions,Major Steven Black,2023-01-12
-C-17,C17-028,Active,Transport missions,Captain Olivia Silver,2023-03-20
-A-29,A29-029,Inactive,Light attack missions,Lieutenant Emma Green,2022-11-22
-F-111,F111-030,Inactive,Long-range strike,Major Peter Blue,2022-12-18
+Model,SerialNumber,MaintenanceStatus,MissionHistory,PilotAssignment,LastInspectionDate,Discrepancies
+F-16,F16-001,Active,Training missions,Captain John Doe,2023-01-15,Cracked canopy
+F-22,F22-002,Inactive,Combat missions,Lieutenant Jane Smith,2022-12-10,Engine overheat
+A-10,A10-003,Active,Support missions,Captain Michael Brown,2023-02-20,Hydraulic fluid leak
+C-130,C130-004,Active,Transport missions,Major Linda Johnson,2023-03-18,Fuel system contamination
+B-2,B2-005,Inactive,Stealth missions,Colonel Richard Davis,2022-11-25,Radar malfunction
+KC-135,KC135-006,Active,Refueling missions,Captain Emily White,2023-04-12,Landing gear issue
+E-3,E3-007,Active,Surveillance missions,Lieutenant Chris Green,2023-01-30,Communication system failure
+MQ-9,MQ9-008,Inactive,Reconnaissance missions,Major Laura Blue,2022-10-05,Sensor calibration error
+F-15,F15-009,Active,Air superiority missions,Lieutenant James Black,2023-02-14,Avionics software glitch
+F-35,F35-010,Active,Multi-role missions,Colonel Sarah Gold,2023-03-01,Fuel pump failure
+B-1,B1-011,Inactive,Long-range bombing,Major Robert Grey,2022-11-15,Bomb bay door malfunction
+C-5,C5-012,Active,Heavy transport missions,Colonel Patricia Silver,2023-03-25,Electrical system short
+T-38,T38-013,Active,Training missions,Lieutenant Kelly Brown,2023-01-18,Ejection seat issue
+RQ-4,RQ4-014,Inactive,High-altitude surveillance,Major Benjamin Green,2022-12-01,Landing gear sensor failure
+F-117,F117-015,Inactive,Stealth attack missions,Colonel Samuel White,2022-11-05,Stealth coating damage
+HH-60,HH60-016,Active,Combat search and rescue,Lieutenant Daniel Black,2023-02-22,Hoist system failure
+MC-130,MC130-017,Active,Special operations missions,Major Rachel Red,2023-04-08,Propeller de-icing issue
+CV-22,CV22-018,Inactive,Tiltrotor missions,Captain Amanda Blue,2022-10-20,Transmission overheating
+HC-130,HC130-019,Active,Rescue missions,Lieutenant Jason Gold,2023-01-05,Navigation system fault
+AC-130,AC130-020,Active,Gunship missions,Major Monica Pink,2023-03-12,Gun turret malfunction
+KC-10,KC10-021,Inactive,Aerial refueling,Colonel Paul Brown,2022-12-15,Fuel boom hydraulic leak
+E-8,E8-022,Active,Ground surveillance,Captain Theresa Green,2023-01-22,Data link disruption
+EC-130,EC130-023,Active,Electronic warfare,Lieutenant Adam White,2023-02-28,Electronic countermeasure failure
+F-5,F5-024,Inactive,Aggressor training,Major Heather Grey,2022-11-18,Engine vibration
+T-6,T6-025,Active,Training missions,Lieutenant Justin Blue,2023-03-06,Oxygen system issue
+U-2,U2-026,Inactive,Reconnaissance,Colonel Aaron Red,2022-12-20,High altitude decompression
+RC-135,RC135-027,Active,Reconnaissance missions,Major Steven Black,2023-01-12,Signal interception error
+C-17,C17-028,Active,Transport missions,Captain Olivia Silver,2023-03-20,Loadmaster control panel fault
+A-29,A29-029,Inactive,Light attack missions,Lieutenant Emma Green,2022-11-22,Weapon system failure
+F-111,F111-030,Inactive,Long-range strike,Major Peter Blue,2022-12-18,Nose gear collapse
+C-21,C21-031,Active,VIP transport missions,Lieutenant Daniel White,2023-01-17,Pressurization issue
+C-32,C32-032,Active,VIP transport missions,Major Christina Black,2023-02-23,Air conditioning failure
+KC-46,KC46-033,Inactive,Aerial refueling,Colonel John Green,2022-11-30,Tanker fuel contamination
+HC-130J,HC130J-034,Active,Rescue missions,Lieutenant Sarah Brown,2023-03-03,Cargo door malfunction
+E-4,E4-035,Active,Airborne command post,Major David White,2023-02-25,Satellite communication failure
+B-52,B52-036,Inactive,Long-range bombing,Colonel William Grey,2022-10-28,Bomb release mechanism fault
+F-14,F14-037,Inactive,Carrier-based missions,Captain Thomas Blue,2022-11-12,Carrier landing gear issue
+A-1,A1-038,Active,Close air support,Lieutenant Kevin Gold,2023-01-28,Propeller pitch control fault
+T-1,T1-039,Active,Trainer missions,Captain Lisa Green,2023-03-08,Landing gear retraction issue
+C-27,C27-040,Active,Light transport missions,Major Eric Silver,2023-01-10,Engine temperature fluctuation
+F-86,F86-041,Inactive,Historical flight missions,Colonel Ronald Black,2022-12-05,Historical airframe fatigue
+F-4,F4-042,Inactive,Air superiority missions,Major Susan White,2022-11-20,Afterburner ignition problem
+C-123,C123-043,Active,Transport missions,Captain Angela Grey,2023-02-27,Flight control system error
+C-40,C40-044,Active,VIP transport missions,Lieutenant Nancy Blue,2023-01-19,Navigation display failure
+OV-10,OV10-045,Inactive,Observation missions,Major Terry Brown,2022-12-02,Observation sensor failure
+KC-135R,KC135R-046,Active,Refueling missions,Captain George Green,2023-03-15,Fuel pump malfunction
+HH-3,HH3-047,Inactive,Rescue missions,Major Ellen White,2022-11-10,Hoist cable wear
+C-141,C141-048,Inactive,Transport missions,Colonel Dennis Black,2022-10-25,Cargo ramp hydraulic issue
+C-9,C9-049,Active,Medical evacuation,Captain Carol Brown,2023-02-10,Medical equipment malfunction
+HH-53,HH53-050,Inactive,Heavy lift missions,Major Rebecca Green,2022-12-08,Rotor blade crack
