@@ -81,6 +81,7 @@ public class AircraftRepository {
         }
     }
 
+    // Ensure other methods like updateAircraft and getAircraftBySerialNumber also include the discrepancies field
     public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus,
                                String missionHistory, String pilotAssignment, Date lastInspectionDate, String discrepancies) {
         if (!aircraftExists(serialNumber)) {

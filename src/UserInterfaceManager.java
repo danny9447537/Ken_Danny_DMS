@@ -11,11 +11,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +28,7 @@ public class UserInterfaceManager {
     private JTextField missionHistoryField;
     private JTextField pilotAssignmentField;
     private JTextField lastInspectionDateField;
+    private JTextField discrepanciesField; // Added field for discrepancies
     private JButton addButton;
     private JButton removeButton;
     private JButton updateButton;
@@ -40,6 +39,7 @@ public class UserInterfaceManager {
     //private JButton setupDBButton;
 
     private AircraftController controller;
+
     /*
      Constructor for the UserInterfaceManager class. Initializes the AircraftController.
      */
@@ -65,6 +65,8 @@ public class UserInterfaceManager {
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+        // background color for main panel
+        mainPanel.setBackground(Color.LIGHT_GRAY);
         mainFrame.add(mainPanel, BorderLayout.CENTER);
     }
 
@@ -114,32 +116,59 @@ public class UserInterfaceManager {
     // Method to create the form panel with labeled text fields and combo boxes.
     private void createFormPanel() {
         JPanel formPanel = new JPanel();
-        formPanel.setLayout(new GridLayout(7, 2, 10, 10));
+        formPanel.setLayout(new GridLayout(8, 2, 10, 10)); // Updated grid layout to include discrepancies field
         formPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // white form panel
+        formPanel.setBackground(Color.WHITE);
 
-        formPanel.add(new JLabel("Model:"));
+        // setting text blue for Model
+        JLabel modelLabel = new JLabel("Model:");
+        modelLabel.setForeground(Color.BLUE);
+        formPanel.add(modelLabel);
         modelField = new JTextField();
         formPanel.add(modelField);
 
-        formPanel.add(new JLabel("Serial Number:"));
+        // setting text blue for serial number
+        JLabel serialNumberLabel = new JLabel("Serial Number:");
+        serialNumberLabel.setForeground(Color.BLUE);
+        formPanel.add(serialNumberLabel);
         serialNumberField = new JTextField();
         formPanel.add(serialNumberField);
 
-        formPanel.add(new JLabel("Maintenance Status:"));
+        // setting text blue for maintenance status
+        JLabel maintenanceStatusLabel = new JLabel("Maintenance Status:");
+        maintenanceStatusLabel.setForeground(Color.BLUE);
+        formPanel.add(maintenanceStatusLabel);
         maintenanceStatusField = new JComboBox<>(new String[]{"Active", "Inactive"});
         formPanel.add(maintenanceStatusField);
 
-        formPanel.add(new JLabel("Mission History:"));
+        // setting text blue for mission history
+        JLabel missionHistoryLabel = new JLabel("Mission History:");
+        missionHistoryLabel.setForeground(Color.BLUE);
+        formPanel.add(missionHistoryLabel);
         missionHistoryField = new JTextField();
         formPanel.add(missionHistoryField);
 
-        formPanel.add(new JLabel("Pilot Assignment:"));
+        // setting text blue for pilot assignment
+        JLabel pilotAssignmentLabel = new JLabel("Pilot Assignment:");
+        pilotAssignmentLabel.setForeground(Color.BLUE);
+        formPanel.add(pilotAssignmentLabel);
         pilotAssignmentField = new JTextField();
         formPanel.add(pilotAssignmentField);
 
-        formPanel.add(new JLabel("Last Inspection Date (yyyy-MM-dd):"));
+        // setting text blue for last inspection date
+        JLabel lastInspectionDateLabel = new JLabel("Last Inspection Date (yyyy-MM-dd):");
+        lastInspectionDateLabel.setForeground(Color.BLUE);
+        formPanel.add(lastInspectionDateLabel);
         lastInspectionDateField = new JTextField();
         formPanel.add(lastInspectionDateField);
+
+        // setting text blue for discrepancies
+        JLabel discrepanciesLabel = new JLabel("Discrepancies:"); // Added label for discrepancies
+        discrepanciesLabel.setForeground(Color.BLUE);
+        formPanel.add(discrepanciesLabel);
+        discrepanciesField = new JTextField(); // Added field for discrepancies
+        formPanel.add(discrepanciesField);
 
         mainPanel.add(formPanel, BorderLayout.CENTER);
     }
@@ -149,14 +178,30 @@ public class UserInterfaceManager {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 8, 10, 20));
         buttonsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        buttonsPanel.setBackground(Color.GRAY);
 
         addButton = new JButton("Add Aircraft");
+        // blue foreground color
+        addButton.setForeground(Color.BLUE);
         removeButton = new JButton("Remove Aircraft");
+        // blue foreground color
+        removeButton.setForeground(Color.BLUE);
         updateButton = new JButton("Update Aircraft");
+        // blue foreground color
+        updateButton.setForeground(Color.BLUE);
         displayButton = new JButton("Display All Aircraft");
+        // blue foreground color
+        displayButton.setForeground(Color.BLUE);
         reportButton = new JButton("Generate Maintenance Report");
+        // blue foreground color
+        reportButton.setForeground(Color.BLUE);
         uploadCSVButton = new JButton("Upload CSV");
+        // blue foreground color
+        uploadCSVButton.setForeground(Color.BLUE);
         deleteAllButton = new JButton("Delete All Aircraft Data");
+        // blue foreground color
+        deleteAllButton.setForeground(Color.BLUE);
+
         //setupDBButton = new JButton("Setup Database");
 
         addButton.addActionListener(new ButtonClickListener());
@@ -175,7 +220,6 @@ public class UserInterfaceManager {
         buttonsPanel.add(reportButton);
         buttonsPanel.add(uploadCSVButton);
         buttonsPanel.add(deleteAllButton);
-        //buttonsPanel.add(setupDBButton);
 
         mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
     }
@@ -185,6 +229,7 @@ public class UserInterfaceManager {
         JPanel instructionsPanel = new JPanel();
         instructionsPanel.setLayout(new BorderLayout());
         instructionsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        instructionsPanel.setBackground(Color.LIGHT_GRAY);
         JLabel instructions = new JLabel("<html>"
                 + "<b>Instructions:</b><br>"
                 + "1. Add Aircraft: Enter all fields and click 'Add Aircraft'.<br>"
@@ -194,8 +239,8 @@ public class UserInterfaceManager {
                 + "5. Generate Maintenance Report: Enter the serial number and click 'Generate Maintenance Report'.<br>"
                 + "6. Upload CSV: Click 'Upload CSV' to upload a CSV file with aircraft details.<br>"
                 + "7. Delete All Aircraft Data: Click 'Delete All Aircraft Data' to remove all aircraft records from the database."
-                + "8. Setup Database: Click 'Setup Database' to initialize the database structure."
                 + "</html>");
+        instructions.setForeground(Color.DARK_GRAY);
         instructionsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         instructionsPanel.add(instructions, BorderLayout.CENTER);
         mainPanel.add(instructionsPanel, BorderLayout.NORTH);
@@ -215,6 +260,7 @@ public class UserInterfaceManager {
             String missionHistory = missionHistoryField.getText().trim();
             String pilotAssignment = pilotAssignmentField.getText().trim();
             String dateString = lastInspectionDateField.getText().trim();
+            String discrepancies = discrepanciesField.getText().trim(); // Added discrepancies
 
             // Validate that all fields are filled out
             if (model.isEmpty() || serialNumber.isEmpty() || missionHistory.isEmpty() || pilotAssignment.isEmpty() || dateString.isEmpty()) {
@@ -230,7 +276,7 @@ public class UserInterfaceManager {
             }
 
             // Add the aircraft
-            controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
+            controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
             JOptionPane.showMessageDialog(mainFrame, "Aircraft added successfully.");
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(mainFrame, "Invalid date format. Please enter the date in yyyy-MM-dd format.");
@@ -264,6 +310,7 @@ public class UserInterfaceManager {
             String missionHistory = missionHistoryField.getText().trim();
             String pilotAssignment = pilotAssignmentField.getText().trim();
             String dateString = lastInspectionDateField.getText().trim();
+            String discrepancies = discrepanciesField.getText().trim(); // Added discrepancies
 
             // Validate that the serial number and date are provided
             if (serialNumber.isEmpty() || dateString.isEmpty()) {
@@ -279,7 +326,7 @@ public class UserInterfaceManager {
             }
 
             // Update the aircraft
-            controller.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
+            controller.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
             JOptionPane.showMessageDialog(mainFrame, "Aircraft updated successfully.");
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(mainFrame, ex.getMessage());
@@ -300,12 +347,7 @@ public class UserInterfaceManager {
                 StringBuilder aircraftDetails = new StringBuilder("<html>");
                 for (Aircraft aircraft : aircraftList) {
                     aircraftDetails
-                            .append("<b>MODEL:</b> ").append(aircraft.getModel()).append("<br/>")
-                            .append("<b>SERIAL NUMBER:</b> ").append(aircraft.getSerialNumber()).append("<br/>")
-                            .append("<b>MAINTENANCE STATUS:</b> ").append(aircraft.getMaintenanceStatus()).append("<br/>")
-                            .append("<b>MISSION HISTORY:</b> ").append(aircraft.getMissionHistory()).append("<br/>")
-                            .append("<b>PILOT ASSIGNMENT:</b> ").append(aircraft.getPilotAssignment()).append("<br/>")
-                            .append("<b>LAST INSPECTION DATE:</b> ").append(aircraft.getLastInspectionDate()).append("<br/><br/>");
+                            .append("<b>MODEL:</b> ").append(aircraft.getModel()).append("<br/><br/>");
                 }
                 aircraftDetails.append("</html>");
 
@@ -369,6 +411,7 @@ public class UserInterfaceManager {
                     .append("<b>MISSION HISTORY:</b> ").append(aircraft.getMissionHistory()).append("<br/>")
                     .append("<b>PILOT ASSIGNMENT:</b> ").append(aircraft.getPilotAssignment()).append("<br/>")
                     .append("<b>LAST INSPECTION DATE:</b> ").append(aircraft.getLastInspectionDate()).append("<br/>")
+                    .append("<b>DISCREPANCIES:</b> ").append(aircraft.getDiscrepancies()).append("<br/>") // Added discrepancies
                     .append("</html>");
 
             JEditorPane textPane = new JEditorPane("text/html", report.toString());
@@ -382,22 +425,48 @@ public class UserInterfaceManager {
     }
 
     // Method to handle uploading a CSV file.
+    /*
+    Slight redo of the handleUploadCSV method to ensure that CSVs are the only file format allowed, otherwise errors will occur.
+     */
     private void handleUploadCSV() {
         JFileChooser fileChooser = new JFileChooser();
+
+        // Add file filter to accept only CSV files
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                }
+                String fileName = f.getName().toLowerCase();
+                return fileName.endsWith(".csv");
+            }
+
+            @Override
+            public String getDescription() {
+                return "CSV Files (*.csv)";
+            }
+        });
+
         int result = fileChooser.showOpenDialog(mainFrame);
         if (result == JFileChooser.APPROVE_OPTION) {
-            try (BufferedReader br = new BufferedReader(new FileReader(fileChooser.getSelectedFile()))) {
+            File selectedFile = fileChooser.getSelectedFile();
+            if (!selectedFile.getName().toLowerCase().endsWith(".csv")) {
+                JOptionPane.showMessageDialog(mainFrame, "Invalid file format. Please select a CSV file.");
+                return;
+            }
+
+            try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
                 String line;
                 boolean isFirstLine = true;
                 while ((line = br.readLine()) != null) {
-                    // Skip the header row
                     if (isFirstLine) {
                         isFirstLine = false;
                         continue;
                     }
                     String[] values = line.split(",");
-                    if (values.length != 6) {
-                        JOptionPane.showMessageDialog(mainFrame, "Invalid CSV format. Each line must have 6 values.");
+                    if (values.length != 7) { // Updated to check for 7 values including discrepancies
+                        JOptionPane.showMessageDialog(mainFrame, "Invalid CSV format. Each line must have 7 values.");
                         continue;
                     }
                     String model = values[0].trim();
@@ -406,21 +475,13 @@ public class UserInterfaceManager {
                     String missionHistory = values[3].trim();
                     String pilotAssignment = values[4].trim();
                     String dateString = values[5].trim();
+                    String discrepancies = values[6].trim(); // Added discrepancies
                     try {
-                        // Debugging line
-                        System.out.println("Attempting to parse date: " + dateString);
                         Date lastInspectionDate = parseDate(dateString);
-                        controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate);
-                        // Success message
-                        System.out.println("Successfully parsed and added aircraft with date: " + dateString);
+                        controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
                     } catch (ParseException ex) {
-                        // Failure message
-                        System.out.println("Failed to parse date: " + dateString);
                         JOptionPane.showMessageDialog(mainFrame, "Invalid date format in CSV for date: " + dateString + ". Please use yyyy-MM-dd format.");
                     } catch (Exception ex) {
-                        // Handle duplicate entries or other errors gracefully
-                        // Error message
-                        System.out.println("Error while adding aircraft with date: " + dateString + ". " + ex.getMessage());
                         JOptionPane.showMessageDialog(mainFrame, "An error occurred while adding aircraft: " + ex.getMessage());
                     }
                 }
@@ -446,23 +507,6 @@ public class UserInterfaceManager {
             }
         }
     }
-
-    // Method to handle database setup
-//    private void handleSetupDatabase() {
-//        // Change: Added method to handle database setup
-//        try (Connection conn = DriverManager.getConnection(Main.getDbUrl(), Main.getDbUser(), Main.getDbPassword());
-//             Statement stmt = conn.createStatement()) {
-//            BufferedReader br = new BufferedReader(new FileReader("Ken_Danny_DMS-master/resources/setup.sql"));
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                stmt.execute(line);
-//            }
-//            br.close();
-//            JOptionPane.showMessageDialog(mainFrame, "Database setup completed successfully.");
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(mainFrame, "An error occurred during database setup: " + e.getMessage());
-//        }
-//    }
 
     // Method to parse a date string.
     private Date parseDate(String dateString) throws ParseException {
@@ -490,8 +534,6 @@ public class UserInterfaceManager {
                 handleUploadCSV();
             } else if (e.getSource() == deleteAllButton) {
                 handleDeleteAllAircraft();
-//            } else if (e.getSource() == setupDBButton) {
-//                handleSetupDatabase();
             }
         }
     }
