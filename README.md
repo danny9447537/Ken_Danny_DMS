@@ -86,6 +86,16 @@ The application includes basic error handling for common issues such as invalid 
 
 This class is used for unit testing. There are multiple methods to test the CRUD functinality of the AircraftRepository class within the test class. 
 
+**JAR File**
+
+To use the .jar file, you can find it under src/resources/Aircraft Database Management System.jar. 
+
+Read the following PDF labeled Windows 11 and Mac Instructions for JAR file. 
+
+**JavaDocs**
+
+You can find the Java Docs folder under src/resources/JavaDocs for all documentation for the project. 
+
 **Contact**
 
 For any questions or inquiries, please contact Danny Ken at dken@mail.valenciacollege.edu
