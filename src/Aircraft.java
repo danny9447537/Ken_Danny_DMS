@@ -17,6 +17,16 @@ public class Aircraft {
     private Date lastInspectionDate;
     private String discrepancies;
 
+    /**
+     *
+     * @param model The model of the aircraft.
+     * @param serialNumber The serial number  of the aircraft.
+     * @param maintenanceStatus The maintenance status of the aircraft.
+     * @param missionHistory The mission history of the aircraft.
+     * @param pilotAssignment The pilot assignment for the aircraft.
+     * @param lastInspectionDate The date of the last inspection.
+     * @param discrepancies Any discrepancies found in the aircraft.
+     */
     public Aircraft(String model, String serialNumber, String maintenanceStatus, String missionHistory,
                     String pilotAssignment, Date lastInspectionDate, String discrepancies) {
         this.model = model;
@@ -28,55 +38,120 @@ public class Aircraft {
         this.discrepancies = discrepancies;
     }
 
-    // Getters and setters
+    // Getters and Setters
+    /**
+     * Gets the discrepancies of the aircraft.
+     *
+     * @return The discrepancies of the aircraft.
+     */
     public String getDiscrepancies() {
         return discrepancies;
     }
 
+    /**
+     * Sets the discrepancies of the aircraft.
+     *
+     * @param discrepancies The discrepancies to set.
+     */
     public void setDiscrepancies(String discrepancies) {
         this.discrepancies = discrepancies;
     }
 
+    /**
+     * Gets the model of the aircraft.
+     *
+     * @return The model of the aircraft.
+     */
     public String getModel() {
         return model;
     }
 
+    /**
+     * Sets the model of the aircraft.
+     *
+     * @param model The model to set.
+     */
     public void setModel(String model) {
         this.model = model;
     }
 
+    /**
+     * Gets the serial number of the aircraft.
+     *
+     * @return The serial number of the aircraft.
+     */
     public String getSerialNumber() {
         return serialNumber;
     }
 
+    /**
+     * Sets the serial number of the aircraft.
+     *
+     * @param serialNumber The serial number to set.
+     */
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 
+    /**
+     * Gets the maintenance status of the aircraft.
+     *
+     * @return The maintenance status of the aircraft.
+     */
     public String getMaintenanceStatus() {
         return maintenanceStatus;
     }
 
+    /**
+     * Sets the maintenance status of the aircraft.
+     *
+     * @param maintenanceStatus The maintenance status to set.
+     */
     public void setMaintenanceStatus(String maintenanceStatus) {
         this.maintenanceStatus = maintenanceStatus;
     }
 
+    /**
+     * Gets the mission history of the aircraft.
+     *
+     * @return The mission history of the aircraft.
+     */
     public String getMissionHistory() {
         return missionHistory;
     }
 
+    /**
+     * Sets the mission history of the aircraft.
+     *
+     * @param missionHistory The mission history to set.
+     */
     public void setMissionHistory(String missionHistory) {
         this.missionHistory = missionHistory;
     }
 
+    /**
+     * Gets the pilot assignment of the aircraft.
+     *
+     * @return The pilot assignment of the aircraft.
+     */
     public String getPilotAssignment() {
         return pilotAssignment;
     }
 
+    /**
+     * Sets the pilot assignment of the aircraft.
+     *
+     * @param pilotAssignment The pilot assignment to set.
+     */
     public void setPilotAssignment(String pilotAssignment) {
         this.pilotAssignment = pilotAssignment;
     }
 
+    /**
+     * Gets the last inspection date of the aircraft.
+     *
+     * @return The last inspection date of the aircraft.
+     */
     public Date getLastInspectionDate() {
         return lastInspectionDate;
     }
@@ -85,7 +160,11 @@ public class Aircraft {
         this.lastInspectionDate = lastInspectionDate;
     }
 
-    // added to string functionality to fix the issue with temrinal not working
+    /**
+     * Returns a string representation of the Aircraft object.
+     *
+     * @return A string representation of the Aircraft object.
+     */
     @Override
     public String toString() {
         return "Aircraft{" +

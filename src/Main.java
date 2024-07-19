@@ -23,23 +23,31 @@ public class Main {
     private static AircraftController controller;
     private static UserInterfaceManager uiManager;
 
+    /**
+     * The main method serves as the entry point for the Aircraft Database Management System application.
+     * It provides a simple command-line interface to interact with the system.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Scanner credentialScanner = new Scanner(System.in);
 
-        // Loop until a successful connection is established
+        // Continuously prompt for MySQL credentials until a successful connection is established
         while (true) {
-            // Prompting for MySQL credentials
+            // Prompting the user to enter the MySQL server URL
             System.out.print("Enter MySQL Server URL (e.g., jdbc:mysql://127.0.0.1:3306/ or " +
                     "jdbc:mysql://localhost:3306/ ): ");
             DB_URL = credentialScanner.nextLine();
 
+            // Prompting the user to enter the MySQL username
             System.out.print("Enter MySQL User: ");
             DB_USER = credentialScanner.nextLine();
 
+            // Prompting the user to enter the MySQL password
             System.out.print("Enter MySQL Password: ");
             DB_PASSWORD = credentialScanner.nextLine();
 
-            // Validate the connection and setup database if necessary
+            // Attempt to validate the connection and set up the database if necessary
             if (validateConnectionAndSetup(DB_URL, DB_USER, DB_PASSWORD)) {
                 System.out.println("Connection established and database setup successfully.");
                 break; // Exit loop once a successful connection is established
@@ -48,17 +56,24 @@ public class Main {
             }
         }
 
-        // Connecting the user to the database with the specific database URL
+        // Define the specific database URL
         String databaseUrl = DB_URL + "aircraft_db";
+        // Initialize the AircraftService with the database URL and credentials
         service = new AircraftService(databaseUrl, DB_USER, DB_PASSWORD);
+
+        // Initialize the AircraftController with the service and scanner
         controller = new AircraftController(service, scanner);
+
+        // Initialize the UserInterfaceManager with the controller
         uiManager = new UserInterfaceManager(controller);
 
+        // Sets up the user interface
         uiManager.initializeUI();
         uiManager.getMainFrame().setVisible(true);
         uiManager.getMainFrame().toFront();
         uiManager.getMainFrame().requestFocus();
 
+        // Main loop to display options and handle user input.
         while (true) {
             System.out.println("Aircraft Database Management System");
             System.out.println("1. Add Aircraft");
@@ -71,8 +86,10 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine();
 
+            // Handle user input based on the selected option.
             switch (choice) {
                 case 1:
+                    // Prompt the user to enter details for a new aircraft.
                     System.out.print("Enter model: ");
                     String model = scanner.nextLine();
                     System.out.print("Enter serial number: ");
@@ -88,11 +105,13 @@ public class Main {
                     System.out.print("Enter discrepancies: ");
                     String discrepancies = scanner.nextLine();
                     try {
+                        // Validate and parse the date string
                         if (dateString == null || dateString.trim().isEmpty()) {
                             System.out.println("Date string cannot be null or empty.");
                             break;
                         }
                         Date lastInspectionDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+                        // Add the aircraft using the controller
                         controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
                         System.out.println("Aircraft added successfully.");
                     } catch (ParseException e) {
@@ -100,12 +119,15 @@ public class Main {
                     }
                     break;
                 case 2:
+                    // Prompt the user to enter the serial number of the aircraft to remove
                     System.out.print("Enter serial number: ");
                     serialNumber = scanner.nextLine();
+                    // Remove the aircraft using the controller
                     controller.removeAircraft(serialNumber);
                     System.out.println("Aircraft removed successfully.");
                     break;
                 case 3:
+                    // Prompt the user to enter updated details for an existing aircraft
                     System.out.print("Enter serial number: ");
                     serialNumber = scanner.nextLine();
                     System.out.print("Enter new model: ");
@@ -122,6 +144,7 @@ public class Main {
                     dateString = scanner.nextLine();
                     System.out.print("Enter new discrepancies: ");
                     discrepancies = scanner.nextLine();
+                    // Validate and parse the new date string
                     try {
                         Date lastInspectionDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
                         controller.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
@@ -131,14 +154,17 @@ public class Main {
                     }
                     break;
                 case 4:
+                    // Display all aircraft using the controller
                     controller.displayAllAircraft();
                     break;
                 case 5:
+                    // Prompt the user to enter the serial number of the aircraft to generate a maintenance report
                     System.out.print("Enter serial number: ");
                     serialNumber = scanner.nextLine();
                     controller.generateMaintenanceReport(serialNumber);
                     break;
                 case 6:
+                    // Exit the application
                     System.out.println("Exiting...");
                     uiManager.getMainFrame().dispose();
                     System.exit(0);
@@ -149,20 +175,42 @@ public class Main {
         }
     }
 
-    // getter methods to access the private fields for the DB
+    // Other methods (getDbUrl, getDbUser, getDbPassword, validateConnectionAndSetup, createDatabaseIfNotExists, useDatabase, setupDatabase)
+    /**
+     * Gets the database URL.
+     *
+     * @return The database URL.
+     */
     public static String getDbUrl() {
         return DB_URL;
     }
 
+    /**
+     * Gets the database user.
+     *
+     * @return The database user.
+     */
     public static String getDbUser() {
         return DB_USER;
     }
 
+    /**
+     * Gets the database password.
+     *
+     * @return The database password.
+     */
     public static String getDbPassword() {
         return DB_PASSWORD;
     }
 
-    // Method to validate the connection and setup the database
+    /**
+     * Validates the connection and sets up the database.
+     *
+     * @param url The URL of the database.
+     * @param user The database user.
+     * @param password The database password.
+     * @return true if the connection is successful and the database is set up, false otherwise.
+     */
     private static boolean validateConnectionAndSetup(String url, String user, String password) {
         String initialUrl = url;
         try (Connection connection = DriverManager.getConnection(initialUrl, user, password)) {
@@ -172,9 +220,9 @@ public class Main {
             // Reconnect with the specific database URL
             String databaseUrl = initialUrl + "aircraft_db";
             try (Connection dbConnection = DriverManager.getConnection(databaseUrl, user, password)) {
-                // Execute the use statement
+                // Switch to the created database
                 useDatabase(dbConnection);
-                // Execute setup.sql if the database doesn't exist
+                // Set up the database schema using the setup.sql file
                 setupDatabase(dbConnection);
             }
             return true;
@@ -184,7 +232,11 @@ public class Main {
         }
     }
 
-    // Method to create the database if it doesn't exist
+    /**
+     * Creates the database if it doesn't exist.
+     *
+     * @param connection The connection to the database.
+     */
     private static void createDatabaseIfNotExists(Connection connection) {
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS aircraft_db");
@@ -194,7 +246,11 @@ public class Main {
         }
     }
 
-    // Method to switch to the created database
+    /**
+     * Switches to the created database.
+     *
+     * @param connection The connection to the database.
+     */
     private static void useDatabase(Connection connection) {
         try (Statement stmt = connection.createStatement()) {
             stmt.executeUpdate("USE aircraft_db");
@@ -204,7 +260,11 @@ public class Main {
         }
     }
 
-    // Method to setup the database using the setup.sql file
+    /**
+     * Sets up the database using the setup.sql file.
+     *
+     * @param connection The connection to the database.
+     */
     private static void setupDatabase(Connection connection) {
         InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("resources/setup.sql");
         if (inputStream == null) {
@@ -223,7 +283,7 @@ public class Main {
                 }
                 sql.append(line);
                 if (line.trim().endsWith(";")) {
-                    // debugging line
+                    // Execute the SQL statement
                     System.out.println("Executing SQL: " + sql.toString());
                     stmt.execute(sql.toString());
                     sql.setLength(0); // Reset the string builder for the next statement

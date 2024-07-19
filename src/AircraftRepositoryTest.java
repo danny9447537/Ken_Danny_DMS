@@ -15,12 +15,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The AircraftRepositoryTest class is responsible for testing the functionality of the methods and classes within the DMS.
+ */
 class AircraftRepositoryTest {
     private static AircraftRepository aircraftRepository;
     private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/aircraft_db";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "password";
 
+    /**
+     * Sets up the AircraftRepository for testing.
+     */
     @BeforeAll
     public static void setUp() {
         aircraftRepository = new AircraftRepository(DB_URL, DB_USER, DB_PASSWORD);
@@ -28,6 +34,9 @@ class AircraftRepositoryTest {
         aircraftRepository.deleteAllAircraft();
     }
 
+    /**
+     * Tests if an aircraft exists in the database.
+     */
     @Test
     @Order(1)
     @DisplayName("Test: Aircraft Exists")
@@ -42,6 +51,9 @@ class AircraftRepositoryTest {
         assertFalse(aircraftRepository.aircraftExists("SNDOESNOTEXIST"));
     }
 
+    /**
+     * Tests adding an aircraft to the database.
+     */
     @Test
     @Order(2)
     @DisplayName("Test: Add Aircraft")
@@ -59,6 +71,9 @@ class AircraftRepositoryTest {
         assertEquals("No discrepancies", retrieved.getDiscrepancies());
     }
 
+    /**
+     * Tests removing an aircraft from the database.
+     */
     @Test
     @Order(3)
     @DisplayName("Test: Remove Aircraft")
@@ -85,6 +100,9 @@ class AircraftRepositoryTest {
         assertNull(retrieved3);
     }
 
+    /**
+     * Tests updating an aircraft in the database.
+     */
     @Test
     @Order(4)
     @DisplayName("Test: Update Aircraft")
@@ -99,6 +117,9 @@ class AircraftRepositoryTest {
         assertEquals("Updated discrepancies", updated.getDiscrepancies());
     }
 
+    /**
+     * Tests retrieving all aircraft from the database.
+     */
     @Test
     @Order(5)
     @DisplayName("Test: Get All Aircraft")
@@ -112,6 +133,9 @@ class AircraftRepositoryTest {
         assertTrue(aircraftList.size() >= 2);
     }
 
+    /**
+     * Tests retrieving an aircraft by its serial number from the database.
+     */
     @Test
     @Order(6)
     @DisplayName("Test: Get Aircraft By Serial Number")
@@ -124,6 +148,9 @@ class AircraftRepositoryTest {
         assertEquals("No discrepancies", retrieved.getDiscrepancies());
     }
 
+    /**
+     * Tests deleting all aircraft from the database.
+     */
     @Test
     @Order(7)
     @DisplayName("Test: Delete All Aircraft")

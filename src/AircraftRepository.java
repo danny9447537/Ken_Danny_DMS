@@ -15,12 +15,24 @@ public class AircraftRepository {
     private String user;
     private String password;
 
+    /**
+     * Constructs a new AircraftRepository
+     *
+     * @param url The URL of the database.
+     * @param user The database user.
+     * @param password The database password.
+     */
     public AircraftRepository(String url, String user, String password) {
         this.url = url;
         this.user = user;
         this.password = password;
     }
 
+    /**
+     * Establishes a connection to the database.
+     *
+     * @return A Connection object representing the database connection.
+     */
     private Connection connect() {
         Connection conn = null;
         try {
@@ -31,6 +43,12 @@ public class AircraftRepository {
         return conn;
     }
 
+    /**
+     * Checks if an aircraft with the specified serial number exists in the database.
+     *
+     * @param serialNumber The serial number of the aircraft.
+     * @return true if the aircraft exists, false otherwise.
+     */
     public boolean aircraftExists(String serialNumber) {
         String sql = "SELECT COUNT(*) FROM aircraft WHERE serialNumber = ?";
         try (Connection conn = this.connect();
@@ -46,6 +64,11 @@ public class AircraftRepository {
         return false;
     }
 
+    /**
+     * Adds a new aircraft to the database.
+     *
+     * @param aircraft The aircraft to add.
+     */
     public void addAircraft(Aircraft aircraft) {
         String sql = "INSERT INTO aircraft (model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, " +
                 "lastInspectionDate, discrepancies) VALUES(?, ?, ?, ?, ?, ?, ?)";
@@ -67,6 +90,11 @@ public class AircraftRepository {
         }
     }
 
+    /**
+     * Removes an aircraft from the database by its serial number.
+     *
+     * @param serialNumber The serial number of the aircraft to remove.
+     */
     public void removeAircraft(String serialNumber) {
         String sql = "DELETE FROM aircraft WHERE serialNumber = ?";
         try (Connection conn = this.connect();
@@ -81,7 +109,20 @@ public class AircraftRepository {
         }
     }
 
-    //updateAircraft and getAircraftBySerialNumber also include the discrepancies field
+    //Updates an existing aircraft in the database.
+
+    /**
+     * Updates an existing aircraft in the database.
+     *
+     * @param serialNumber The serial number of the aircraft to update.
+     * @param model The new model of the aircraft.
+     * @param newSerialNumber The new serial number of the aircraft.
+     * @param maintenanceStatus The new maintenance status of the aircraft.
+     * @param missionHistory The new mission history of the aircraft.
+     * @param pilotAssignment The new pilot assignment for the aircraft.
+     * @param lastInspectionDate The new last inspection date of the aircraft.
+     * @param discrepancies The new discrepancies found in the aircraft.
+     */
     public void updateAircraft(String serialNumber, String model, String newSerialNumber, String maintenanceStatus,
                                String missionHistory, String pilotAssignment, Date lastInspectionDate, String discrepancies) {
         if (!aircraftExists(serialNumber)) {
@@ -114,6 +155,11 @@ public class AircraftRepository {
         }
     }
 
+    /**
+     * Retrieves a lsit of all aircraft from the database.
+     *
+     * @return A list of all aircraft.
+     */
     public List<Aircraft> getAllAircraft() {
         String sql = "SELECT * FROM aircraft";
         List<Aircraft> aircraftList = new ArrayList<>();
@@ -140,6 +186,12 @@ public class AircraftRepository {
         return aircraftList;
     }
 
+    /**
+     * Retrieves an aircraft by its serial number from the database.
+     *
+     * @param serialNumber The serial number of the aircraft.
+     * @return The aircraft with the specified serial number.
+     */
     public Aircraft getAircraftBySerialNumber(String serialNumber) {
         String sql = "SELECT * FROM aircraft WHERE serialNumber = ?";
         Aircraft aircraft = null;
@@ -167,6 +219,9 @@ public class AircraftRepository {
         return aircraft;
     }
 
+    /**
+     * Deletes all aircraft from the database.
+     */
     public void deleteAllAircraft() {
         String sql = "DELETE FROM aircraft";
         try (Connection conn = this.connect();

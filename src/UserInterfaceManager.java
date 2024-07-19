@@ -36,18 +36,20 @@ public class UserInterfaceManager {
     private JButton reportButton;
     private JButton uploadCSVButton;
     private JButton deleteAllButton;
-    //private JButton setupDBButton;
-
     private AircraftController controller;
 
-    /*
-     Constructor for the UserInterfaceManager class. Initializes the AircraftController.
+    /**
+     * Constructs a new UserInterfaceManager
+     *
+     * @param controller The controller to use for aircraft operations.
      */
     public UserInterfaceManager(AircraftController controller) {
         this.controller = controller;
     }
 
-    // Method to initialize the user interface components.
+    /**
+     * Initializes the user interface components.
+     */
     public void initializeUI() {
         createMainFrame();
         createMenu();
@@ -56,7 +58,9 @@ public class UserInterfaceManager {
         addInstructions();
     }
 
-    // Method to create the main frame of the application.
+    /**
+     * Creates the mainframe of the application
+     */
     private void createMainFrame() {
         mainFrame = new JFrame("Aircraft Database Management System");
         mainFrame.setSize(1800, 600);
@@ -70,7 +74,9 @@ public class UserInterfaceManager {
         mainFrame.add(mainPanel, BorderLayout.CENTER);
     }
 
-    // Method to create the menu bar with relevant options.
+    /**
+     * Creates the menu bar with relevant options.
+     */
     private void createMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Options");
@@ -113,7 +119,9 @@ public class UserInterfaceManager {
         mainFrame.setJMenuBar(menuBar);
     }
 
-    // Method to create the form panel with labeled text fields and combo boxes.
+    /**
+     * Creates the form panel with labeled text fields and combo boxes.
+     */
     private void createFormPanel() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(8, 2, 10, 10)); // Updated grid layout to include discrepancies field
@@ -164,16 +172,18 @@ public class UserInterfaceManager {
         formPanel.add(lastInspectionDateField);
 
         // setting text blue for discrepancies
-        JLabel discrepanciesLabel = new JLabel("Discrepancies:"); // Added label for discrepancies
+        JLabel discrepanciesLabel = new JLabel("Discrepancies:");
         discrepanciesLabel.setForeground(Color.BLUE);
         formPanel.add(discrepanciesLabel);
-        discrepanciesField = new JTextField(); // Added field for discrepancies
+        discrepanciesField = new JTextField();
         formPanel.add(discrepanciesField);
 
         mainPanel.add(formPanel, BorderLayout.CENTER);
     }
 
-    // Method to create the buttons panel.
+    /**
+     * Creates the button panel.
+     */
     private void createButtonsPanel() {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1, 8, 10, 20));
@@ -224,7 +234,9 @@ public class UserInterfaceManager {
         mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
     }
 
-    // Method to add instructions for the user.
+    /**
+     * Adds instructions for the user.
+     */
     private void addInstructions() {
         JPanel instructionsPanel = new JPanel();
         instructionsPanel.setLayout(new BorderLayout());
@@ -246,12 +258,18 @@ public class UserInterfaceManager {
         mainPanel.add(instructionsPanel, BorderLayout.NORTH);
     }
 
-    // Method to get the main frame of the application.
+    /**
+     * Gets the main frame of the application.
+     *
+     * @return The main frame.
+     */
     public JFrame getMainFrame() {
         return mainFrame;
     }
 
-    // Method to handle adding aircraft.
+    /**
+     * Handles adding an aircraft.
+     */
     private void handleAddAircraft() {
         try {
             String model = modelField.getText().trim();
@@ -262,7 +280,7 @@ public class UserInterfaceManager {
             String dateString = lastInspectionDateField.getText().trim();
             String discrepancies = discrepanciesField.getText().trim(); // Added discrepancies
 
-            // Validate that all fields are filled out
+            // Validates that all fields are filled out
             if (model.isEmpty() || serialNumber.isEmpty() || missionHistory.isEmpty() || pilotAssignment.isEmpty() || dateString.isEmpty()) {
                 JOptionPane.showMessageDialog(mainFrame, "All fields must be filled out to add an aircraft.");
                 return;
@@ -275,7 +293,7 @@ public class UserInterfaceManager {
                 return;
             }
 
-            // Add the aircraft
+            // Add the aircraft using the controller
             controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
             JOptionPane.showMessageDialog(mainFrame, "Aircraft added successfully.");
         } catch (ParseException ex) {
@@ -285,7 +303,9 @@ public class UserInterfaceManager {
         }
     }
 
-    // Method to handle removing aircraft.
+    /**
+     * Handles removing an aircraft.
+     */
     private void handleRemoveAircraft() {
         try {
             String serialNumber = serialNumberField.getText().trim();
@@ -293,6 +313,7 @@ public class UserInterfaceManager {
                 JOptionPane.showMessageDialog(mainFrame, "Serial number must be provided to remove an aircraft.");
                 return;
             }
+            // Remove the aircraft using the controller
             controller.removeAircraft(serialNumber);
             JOptionPane.showMessageDialog(mainFrame, "Aircraft removed successfully.");
         } catch (Exception ex) {
@@ -300,7 +321,9 @@ public class UserInterfaceManager {
         }
     }
 
-    // Method to handle updating aircraft.
+    /**
+     * Handles updating an aircraft.
+     */
     private void handleUpdateAircraft() {
         try {
             String serialNumber = serialNumberField.getText().trim();
@@ -312,7 +335,7 @@ public class UserInterfaceManager {
             String dateString = lastInspectionDateField.getText().trim();
             String discrepancies = discrepanciesField.getText().trim(); // Added discrepancies
 
-            // Validate that the serial number and date are provided
+            // Validates that the serial number and date are provided
             if (serialNumber.isEmpty() || dateString.isEmpty()) {
                 JOptionPane.showMessageDialog(mainFrame, "Serial number and date must be provided to update an aircraft.");
                 return;
@@ -325,7 +348,7 @@ public class UserInterfaceManager {
                 return;
             }
 
-            // Update the aircraft
+            // Updates the aircraft using the controller
             controller.updateAircraft(serialNumber, model, newSerialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
             JOptionPane.showMessageDialog(mainFrame, "Aircraft updated successfully.");
         } catch (RuntimeException ex) {
@@ -337,7 +360,9 @@ public class UserInterfaceManager {
         }
     }
 
-    // Method to handle displaying all aircraft.
+    /**
+     * Handles displaying all aircraft.
+     */
     private void handleDisplayAllAircraft() {
         try {
             List<Aircraft> aircraftList = controller.getAllAircraft();
@@ -363,7 +388,9 @@ public class UserInterfaceManager {
         }
     }
 
-    // Method to handle generating a maintenance report.
+    /**
+     * Handles generating a maintenance report.
+     */
     private void handleGenerateMaintenanceReport() {
         try {
             // Get all aircraft to display in a selection dialog
@@ -424,9 +451,8 @@ public class UserInterfaceManager {
         }
     }
 
-    // Method to handle uploading a CSV file.
-    /*
-    Slight redo of the handleUploadCSV method to ensure that CSVs are the only file format allowed, otherwise errors will occur.
+    /**
+     * Handles uploading a CSV file.
      */
     private void handleUploadCSV() {
         JFileChooser fileChooser = new JFileChooser();
@@ -475,7 +501,7 @@ public class UserInterfaceManager {
                     String missionHistory = values[3].trim();
                     String pilotAssignment = values[4].trim();
                     String dateString = values[5].trim();
-                    String discrepancies = values[6].trim(); // Added discrepancies
+                    String discrepancies = values[6].trim();
                     try {
                         Date lastInspectionDate = parseDate(dateString);
                         controller.addAircraft(model, serialNumber, maintenanceStatus, missionHistory, pilotAssignment, lastInspectionDate, discrepancies);
@@ -492,7 +518,9 @@ public class UserInterfaceManager {
         }
     }
 
-    // Method to handle deleting all aircraft data.
+    /**
+     * Handles deleting all aircraft data.
+     */
     private void handleDeleteAllAircraft() {
         int confirmation = JOptionPane.showConfirmDialog(mainFrame,
                 "Are you sure you want to delete all aircraft data?",
@@ -508,7 +536,13 @@ public class UserInterfaceManager {
         }
     }
 
-    // Method to parse a date string.
+    /**
+     * Parses a date string.
+     *
+     * @param dateString The date string to parse.
+     * @return The parsed Date object.
+     * @throws ParseException If the date string is invalid.
+     */
     private Date parseDate(String dateString) throws ParseException {
         if (dateString == null || dateString.trim().isEmpty()) {
             throw new ParseException("Date string cannot be null or empty.", 0);
@@ -516,7 +550,9 @@ public class UserInterfaceManager {
         return new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
     }
 
-    // Inner class to handle button click events.
+    /**
+     * Inner class to handle click events.
+     */
     private class ButtonClickListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
